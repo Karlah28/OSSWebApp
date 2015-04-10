@@ -1,6 +1,8 @@
+/// <reference path="homecontroller.ts" />
 /// <reference path="../services/NavbarService.ts" />
 /// <reference path="../interfaces/interfaces.ts" />
 /// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../Models/Login.ts" />
 var ossApp;
 (function (ossApp) {
     var controllers;
@@ -13,12 +15,13 @@ var ossApp;
                 var url = "your local host";
                 $scope.userEmail = "karla@mavs.uta";
                 $scope.password = "admin";
-                $scope.login = function (email, password) {
+                $scope.loginUser = function () {
                     //create a registered user 
                     //Send it using the service
                     // $scope.user = new 
-                    if (email == $scope.userEmail && password == $scope.password) {
+                    if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
                         console.log("login Success");
+                        alert("login success!");
                         $location.url('/dashboard');
                     }
                     else {

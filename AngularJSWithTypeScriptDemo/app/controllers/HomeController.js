@@ -27,4 +27,4 @@ var ossApp;
         angular.module("ossApp").controller("ossApp.controllers.HomeController", HomeController);
     })(controllers = ossApp.controllers || (ossApp.controllers = {}));
 })(ossApp || (ossApp = {}));
-//# sourceMappingURL=HomeController.js.map
+//# sourceMappingURL=homecontroller.js.map

@@ -1,6 +1,8 @@
-﻿/// <reference path="../services/NavbarService.ts" />
+﻿/// <reference path="homecontroller.ts" />
+/// <reference path="../services/NavbarService.ts" />
 /// <reference path="../interfaces/interfaces.ts" />
 /// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../Models/Login.ts" />
 module ossApp.controllers {
     export class LoginController {
 
@@ -10,12 +12,14 @@ module ossApp.controllers {
             'ossApp.Services.HttpService',
             '$scope',
             '$location'
+            //'Login'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
             $scope,
-            $location                                                
+            $location
+            //Login                                                
             ) {
 
             $scope.title = "Login or Register";
@@ -26,15 +30,15 @@ module ossApp.controllers {
             $scope.userEmail = "karla@mavs.uta"
             $scope.password = "admin";
 
-
-            $scope.login = (email: string, password: string) => {
+            $scope.loginUser = function() {
                 //create a registered user 
                 
                 //Send it using the service
                 
                // $scope.user = new 
-                if (email == $scope.userEmail && password == $scope.password) {
+                if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
                     console.log("login Success");
+                    alert("login success!");
                     $location.url('/dashboard');
                 }
                 else {                                                                
