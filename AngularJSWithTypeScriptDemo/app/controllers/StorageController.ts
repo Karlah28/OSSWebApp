@@ -1,0 +1,40 @@
+﻿/// <reference path="../services/NavbarService.ts" />
+/// <reference path="../interfaces/interfaces.ts" />
+/// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
+module ossApp.controllers {
+    export class StorageController {
+
+        NavbarService: ossApp.Interfaces.INavbarService;
+        static $inject = [
+            "ossApp.Services.NavbarService",
+            'ossApp.Services.HttpService',
+            '$scope'
+        ];
+        constructor(
+            NavbarService: ossApp.Interfaces.INavbarService,
+            HttpService: ossApp.Interfaces.HttpService,
+            private $scope
+            ) {
+            //var favorites: Array<ossApp.Interfaces.ITrack>;
+            //this.NavbarService = NavbarService;
+            
+            //$scope.cratesList: Array<ossApp.Interfaces.Item>;
+            $scope.title = "Storage Management";
+            $scope.getCrates = () => {
+
+                //$scope.crates = cratesList;
+
+                       
+            };
+
+        }
+
+        private constructCrates() {
+            //this.cratesList = {
+
+            //}
+        }
+    }
+
+    angular.module("ossApp").controller("ossApp.controllers.StorageController", StorageController);
+}

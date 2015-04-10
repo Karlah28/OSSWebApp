@@ -1,0 +1,42 @@
+﻿/// <reference path="../interfaces/interfaces.ts" />
+module ossApp.Services {
+
+
+    export class HttpService implements ossApp.Interfaces.HttpService {
+        httpService: ng.IHttpService
+        static $inject = ["$http"];
+        constructor($http: ng.IHttpService) {
+            this.httpService = $http;
+        }
+
+        public serverGet(url: string, callback: (data: any, status: any) => void): void {
+            this.httpService.get(url).
+                success((data: any, status: any, headers: any, config: any) => {
+                if (status === 200) {
+                    callback(data, status);
+                } else {
+                    callback(data, status);
+                }
+                }).error((data: any, status: any, headers: any, config: any) => {
+                console.log("error");
+            });
+        }
+
+        public serverPost(url: string, data: any, callback: (data: any, status: any) => void): void {
+            var self = this;
+            self.httpService.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+            self.httpService.post(url, data).
+                success((data: any, status: any, headers: any, config: any) => {
+                if (status === 200) {
+                    callback(data, status);
+                } else {
+                   console.log("server call failed, Status - " + status.toString());
+                    callback(data, status);
+                }
+            }).error((data: any, status: any, headers: any, config: any) => {
+                callback(data, status);
+            });
+        }
+    }
+    angular.module("ossApp").service("ossApp.Services.HttpService", HttpService);
+}  
