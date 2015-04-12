@@ -16,6 +16,14 @@ module ossApp {
                 .when("/storageManagement", {
                 controller: "ossApp.controllers.StorageController",
                 templateUrl: "/app/views/storageManagement.html"
+                })
+                .when("/userAdministration", {
+                controller: "ossApp.controllers.UserAdminController",
+                templateUrl: "/app/views/userAdministration.html"
+                })
+                .when("/itemAdministration", {
+                controller: "ossApp.controllers.ItemAdminController",
+                templateUrl: "/app/views/itemAdministration.html"
             })
                 .otherwise({
                 redirectTo: '/home'

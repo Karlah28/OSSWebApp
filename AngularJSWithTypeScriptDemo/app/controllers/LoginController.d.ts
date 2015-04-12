@@ -1,8 +1,7 @@
-/// <reference path="HomeController.d.ts" />
+/// <reference path="homecontroller.d.ts" />
 /// <reference path="../services/NavbarService.d.ts" />
 /// <reference path="../interfaces/interfaces.d.ts" />
 /// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
-/// <reference path="../Models/Login.d.ts" />
 declare module ossApp.controllers {
     class LoginController {
         NavbarService: ossApp.Interfaces.INavbarService;

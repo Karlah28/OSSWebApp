@@ -2,7 +2,6 @@
 /// <reference path="../services/NavbarService.ts" />
 /// <reference path="../interfaces/interfaces.ts" />
 /// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
-/// <reference path="../Models/Login.ts" />
 var ossApp;
 (function (ossApp) {
     var controllers;

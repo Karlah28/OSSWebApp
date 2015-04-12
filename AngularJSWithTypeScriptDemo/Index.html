@@ -70,7 +70,10 @@
                     <a ng-href="#/storageManagement">Storage Management</a>
                 </li>
                 <li>
-                    <a href="#">User Management</a>
+                    <a href="#/userAdministration">User Management</a>
+                </li>
+                <li>
+                    <a href="#/itemAdministration">Inventory Administration</a>
                 </li>
                 <li>
                     <a href="#">Overview</a>
@@ -90,7 +93,7 @@
         <!-- /#sidebar-wrapper -->
         <!--/Side Menu-->
 
-        <div ng-view>
+        <div ng-view> <!--this is where every view gets injected/ this is the content-->
         </div>
 
         <!----- Footer ---->
@@ -124,6 +127,8 @@
     <script src="app/controllers/HomeController.js"></script>
     <script src="app/controllers/LoginController.js"></script>
     <script src="app/controllers/StorageController.js"></script>
+    <script src="app/controllers/UserAdminController.js"></script>
+    <script src="app/controllers/ItemAdminController.js"></script>
 
 
 
