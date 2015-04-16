@@ -29,10 +29,15 @@
             <!-- CRATE LIST -->
             <div class="panel panel-default">
                 <div class="panel-heading">Crates</div>
-                <table class="table" data-search="true">
+                <table class="table" ng-init="i=0">
+                    <th data-checkbox="true"></th>
                     <th><a href="" ng-click="predicate ='name'; reverse=!reverse">Label</a></th>
                     <th><a href="" ng-click="predicate='age'; reverse=!reverse">Quantity</a></th>
                     <tr class="animate-repeat" ng-repeat="friend in friends | orderBy:predicate:reverse">
+                        <td>
+                            <!--gotta use get request or something.. refer to w3schools-->
+                            <input type="checkbox" name="identifier" value="friend" />
+                        </td>
                         <td>
                             {{friend.name}}
                         </td>
