@@ -35,6 +35,9 @@ module ossApp.controllers {
 
             $scope.removeItem = (item) => {
                 for (var i = 0; i < $scope.itemArray.length; i++) {
+                    //ATTENTION MOTHER TRUCKER >>>> THIS IS IMPORTANT
+                    //need this attribute to be made relevant ($scope.itemArray[i]. << something proper here
+                    //also need to add functions for adding and removing crates to the list
                     if ($scope.itemArray[i].name == item.name) {
                         console.log("omg");
                     }
