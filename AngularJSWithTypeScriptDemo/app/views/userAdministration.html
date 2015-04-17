@@ -4,10 +4,22 @@
     <div class="panel panel-default">
         <div class="panel-heading">User Account Requests</div>
         <table class="table">
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
+            <th><a href="" ng-click="predicate =''; reverse=!reverse">First Name</a></th>
+            <th><a href="" ng-click="predicate =''; reverse=!reverse">Last Name</a></th>
+            <th><a href="" ng-click="predicate =''; reverse=!reverse">Email</a></th>
+            <th><a href="" ng-click="predicate =''; reverse=!reverse">Phone Number</a></th>
+            <tr class="animate-repeat" ng-repeat="friend in friends | orderBy:predicate:reverse">
+                <td>
+                    <input type="checkbox" name="identifier" ng-value="friend" ng-click="addItem(friend)" />
+                    <!-- the ng-click calls a function in the controller that adds the item to an array-->
+                </td>
+                <td>
+                    {{friend.name}}
+                </td>
+                <td>
+                    {{friend.age}}
+                </td>
+            </tr>
         </table>
     </div>
 </div>
