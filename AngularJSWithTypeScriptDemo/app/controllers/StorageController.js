@@ -15,10 +15,11 @@ var ossApp;
                 //$scope.cratesList: Array<ossApp.Interfaces.Item>;
                 $scope.itemArray = [];
                 $scope.title = "Storage Management";
-                $scope.getCrates = function () {
+                $scope.getItems = function () {
                     //this is the Route specified in the server's controllers 
-                    var urlController = "//ViewItems";
+                    var urlController = "/ViewItems";
                     HttpService.serverGet($scope.serverUrl + urlController, function (response) {
+                        //response is a variable that stores the data gotten from the server
                         //parse the response here
                         //Add it to local storage
                         //$localStorage.Item= //some trimmed item from the response
