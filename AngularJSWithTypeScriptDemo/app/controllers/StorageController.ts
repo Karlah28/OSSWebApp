@@ -24,7 +24,12 @@ module ossApp.controllers {
             
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;
-            
+            $scope.allItems = [
+            { ItemName: 'John', ItemQuantity:25, gender:'boy' },
+            { ItemName: 'Jessie', ItemQuantity:30, gender:'girl' },
+            { ItemName: 'Johanna', ItemQuantity:28, gender:'girl' }];
+
+
             //$scope.cratesList: Array<ossApp.Interfaces.Item>;
             $scope.itemArray = [];
             $scope.title = "Storage Management";
@@ -32,11 +37,11 @@ module ossApp.controllers {
                 //this is the Route specified in the server's controllers 
                 var urlController = "/ViewItems";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    $scope.allItems.push(JSON.parse(response));
                     //response is a variable that stores the data gotten from the server
                     //parse the response here
                     //Add it to local storage
                     //$localStorage.Item= //some trimmed item from the response
-
                 });
                 //create a request object
 
