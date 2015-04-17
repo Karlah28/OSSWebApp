@@ -6,7 +6,7 @@ var ossApp;
     var controllers;
     (function (controllers) {
         var StorageController = (function () {
-            function StorageController(NavbarService, HttpService, $scope, $localStorage) {
+            function StorageController(NavbarService, HttpService, $scope) {
                 //this is your local storage
                 this.$scope = $scope;
                 $scope.serverUrl = "yourLocalHost.com/port";

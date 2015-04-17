@@ -14,8 +14,8 @@ module ossApp.controllers {
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
-            private $scope,
-            $localStorage
+            private $scope
+            //$localStorage
             ) {
 
             //this is your local storage
