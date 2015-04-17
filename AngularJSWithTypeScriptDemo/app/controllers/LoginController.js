@@ -24,7 +24,7 @@ var ossApp;
                         console.log("login Success");
                         alert("login success!");
                         //LoginService.login(true);
-                        $location.url('/dashboard');
+                        $location.url('/storageManagement');
                     }
                     else {
                         console.log("login failed");

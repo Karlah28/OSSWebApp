@@ -9,20 +9,34 @@ var ossApp;
             function StorageController(NavbarService, HttpService, $scope) {
                 //this is your local storage
                 this.$scope = $scope;
-                $scope.serverUrl = "yourLocalHost.com/port";
+                $scope.serverUrl = "localhost:51941";
                 //var favorites: Array<ossApp.Interfaces.ITrack>;
                 //this.NavbarService = NavbarService;
                 $scope.allItems = [
-                    { ItemName: 'John', ItemQuantity: 25, gender: 'boy' },
-                    { ItemName: 'Jessie', ItemQuantity: 30, gender: 'girl' },
-                    { ItemName: 'Johanna', ItemQuantity: 28, gender: 'girl' }
+                    { ItemName: 'Scissors', ItemQuantity: 25, gender: 'boy' },
+                    { ItemName: 'Tables', ItemQuantity: 1, gender: 'girl' },
+                    { ItemName: 'Pencils', ItemQuantity: 30, gender: 'girl' },
+                    { ItemName: 'Shirts', ItemQuantity: 2, gender: 'girl' },
+                    { ItemName: 'Notebooks', ItemQuantity: 32, gender: 'girl' }
+                ];
+                $scope.allCrates = [
+                    { ItemName: 'Crate 1', ItemQuantity: 25, gender: 'boy' },
+                    { ItemName: 'Crate 2', ItemQuantity: 1, gender: 'girl' },
+                    { ItemName: 'Crate 3', ItemQuantity: 30, gender: 'girl' },
+                    { ItemName: 'Crate 4', ItemQuantity: 2, gender: 'girl' },
+                    { ItemName: 'Crate 5', ItemQuantity: 32, gender: 'girl' }
+                ];
+                $scope.allProjects = [
+                    { ItemName: 'Engineering Saturday', ItemQuantity: 25, gender: 'boy' },
+                    { ItemName: 'Outreach Sunday', ItemQuantity: 1, gender: 'girl' },
+                    { ItemName: 'UTA Career Fair', ItemQuantity: 30, gender: 'girl' },
                 ];
                 //$scope.cratesList: Array<ossApp.Interfaces.Item>;
                 $scope.itemArray = [];
                 $scope.title = "Storage Management";
                 $scope.getItems = function () {
                     //this is the Route specified in the server's controllers 
-                    var urlController = "/ViewItems";
+                    var urlController = "/InventoryController/ViewItems";
                     HttpService.serverGet($scope.serverUrl + urlController, function (response) {
                         $scope.allItems.push(JSON.parse(response));
                         //response is a variable that stores the data gotten from the server
@@ -33,6 +47,9 @@ var ossApp;
                     //create a request object
                     //$scope.crates = cratesList;
                     //pull items from db
+                };
+                $scope.sendRequest = function () {
+                    window.alert("Request Successfully Sent");
                 };
                 //this adds an item to the array for the button to pass
                 $scope.addItem = function (item) {
