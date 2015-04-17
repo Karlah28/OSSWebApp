@@ -188,3 +188,5 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 *.map
+*.map
+AngularJSWithTypeScriptDemo/app/controllers/StorageController.js.map
