@@ -6,14 +6,15 @@ var ossApp;
     var controllers;
     (function (controllers) {
         var AddInventoryController = (function () {
-            function AddInventoryController(NavbarService, HttpService, LoginService, $scope) {
+            function AddInventoryController(NavbarService, HttpService, 
+                //LoginService: ossApp.Services.LoginService,
+                $scope) {
+                //$scope.isLoggedIn = LoginService.isLogged();
                 this.$scope = $scope;
-                $scope.isLoggedIn = LoginService.isLogged();
             }
             AddInventoryController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
-                'ossApp.Services.LoginService',
                 '$scope',
             ];
             return AddInventoryController;

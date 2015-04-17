@@ -8,18 +8,18 @@ module ossApp.controllers {
         static $inject = [
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
-            'ossApp.Services.LoginService',
+            //'ossApp.Services.LoginService',
             '$scope',
 
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
-            LoginService: ossApp.Services.LoginService,
+            //LoginService: ossApp.Services.LoginService,
             private $scope
             ) {
 
-            $scope.isLoggedIn = LoginService.isLogged();
+            //$scope.isLoggedIn = LoginService.isLogged();
 
         }
 
