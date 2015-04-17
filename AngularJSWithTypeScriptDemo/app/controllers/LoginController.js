@@ -21,6 +21,7 @@ var ossApp;
                     if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
                         console.log("login Success");
                         alert("login success!");
+                        LoginService.login(true);
                         $location.url('/dashboard');
                     }
                     else {
