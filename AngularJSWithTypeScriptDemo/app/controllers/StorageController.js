@@ -54,7 +54,7 @@ var ossApp;
             StorageController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
-                '$scope',
+                '$scope'
             ];
             return StorageController;
         })();

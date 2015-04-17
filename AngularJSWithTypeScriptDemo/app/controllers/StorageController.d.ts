@@ -3,7 +3,7 @@
 /// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
 declare module ossApp.controllers {
     class StorageController {
-        private $scope;
+        $scope: any;
         NavbarService: ossApp.Interfaces.INavbarService;
         static $inject: string[];
         constructor(NavbarService: ossApp.Interfaces.INavbarService, HttpService: ossApp.Interfaces.HttpService, $scope: any);

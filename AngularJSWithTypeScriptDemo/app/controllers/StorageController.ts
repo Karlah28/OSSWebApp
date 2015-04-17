@@ -8,14 +8,14 @@ module ossApp.controllers {
         static $inject = [
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
-            '$scope',
+            '$scope'
             //'$localStorage'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
-            private $scope
-            //$localStorage
+            public $scope
+        //$localStorage
             ) {
 
             //this is your local storage
@@ -25,9 +25,9 @@ module ossApp.controllers {
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;
             $scope.allItems = [
-            { ItemName: 'John', ItemQuantity:25, gender:'boy' },
+            { ItemName: 'John', ItemQuantity: 25, gender: 'boy' },
             { ItemName: 'Jessie', ItemQuantity:30, gender:'girl' },
-            { ItemName: 'Johanna', ItemQuantity:28, gender:'girl' }];
+            { ItemName: 'Johanna', ItemQuantity: 28, gender: 'girl' }];
 
 
             //$scope.cratesList: Array<ossApp.Interfaces.Item>;

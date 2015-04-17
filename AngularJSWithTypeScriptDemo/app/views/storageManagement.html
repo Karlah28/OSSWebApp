@@ -26,12 +26,12 @@
             <!-- ITEM LIST -->
             <div class="panel panel-default">
                 <div class="panel-heading">Crates</div>
-                <table class="table" ng-init="i=0">
+                <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
-                    <th><a href="" ng-click="predicate ='$scope.allItems.itemName'; reverse=!reverse">Label</a></th>
-                    <th><a href="" ng-click="predicate='age'; reverse=!reverse">Quantity</a></th>
+                    <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
+                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse">Quantity</a></th>
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
-                    <tr class="animate-repeat" ng-repeat="item in $scope.allItems | orderBy:predicate:reverse">
+                    <tr class="animate-repeat" ng-repeat="item in allItems | orderBy:predicate:reverse">
                         <td>
                             <input type="checkbox" name="identifier" ng-value="item" ng-click="addItem(item)" />
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
