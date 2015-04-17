@@ -28,10 +28,11 @@ module ossApp.controllers {
             //$scope.cratesList: Array<ossApp.Interfaces.Item>;
             $scope.itemArray = [];
             $scope.title = "Storage Management";
-            $scope.getCrates = () => {
+            $scope.getItems = () => {
                 //this is the Route specified in the server's controllers 
-                var urlController = "//ViewItems";
-                HttpService.serverGet($scope.serverUrl+urlController,(response) => {
+                var urlController = "/ViewItems";
+                HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    //response is a variable that stores the data gotten from the server
                     //parse the response here
                     //Add it to local storage
                     //$localStorage.Item= //some trimmed item from the response
