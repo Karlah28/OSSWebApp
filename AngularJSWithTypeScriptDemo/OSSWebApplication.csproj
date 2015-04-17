@@ -62,6 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\services\ngStorage.js" />
     <Content Include="app\views\itemAdministration.html" />
     <Content Include="app\views\storageManagement.html" />
     <Content Include="app\views\landingPage.html" />
