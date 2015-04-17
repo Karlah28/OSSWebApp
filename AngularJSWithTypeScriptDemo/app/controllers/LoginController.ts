@@ -9,6 +9,7 @@ module ossApp.controllers {
         static $inject = [
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
+            'ossApp.Services.LoginService',
             '$scope',
             '$location'
             //'Login'
@@ -16,6 +17,7 @@ module ossApp.controllers {
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
+            LoginService: ossApp.Services.LoginService,
             $scope,
             $location
             //Login                                                

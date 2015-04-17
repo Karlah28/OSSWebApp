@@ -7,7 +7,7 @@ var ossApp;
     var controllers;
     (function (controllers) {
         var LoginController = (function () {
-            function LoginController(NavbarService, HttpService, $scope, $location) {
+            function LoginController(NavbarService, HttpService, LoginService, $scope, $location) {
                 $scope.title = "Login or Register";
                 var favorites;
                 this.NavbarService = NavbarService;
@@ -34,6 +34,7 @@ var ossApp;
             LoginController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
+                'ossApp.Services.LoginService',
                 '$scope',
                 '$location'
             ];

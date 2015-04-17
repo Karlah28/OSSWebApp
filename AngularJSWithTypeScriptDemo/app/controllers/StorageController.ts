@@ -8,13 +8,20 @@ module ossApp.controllers {
         static $inject = [
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
-            '$scope'
+            '$scope',
+            '$localStorage'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
-            private $scope
+            private $scope,
+            $localStorage
             ) {
+
+            //this is your local storage
+            
+            $scope.serverUrl = "yourLocalHost.com/port";
+            
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;
             
@@ -22,8 +29,21 @@ module ossApp.controllers {
             $scope.itemArray = [];
             $scope.title = "Storage Management";
             $scope.getCrates = () => {
+                //this is the Route specified in the server's controllers 
+                var urlController = "//ViewItems";
+                HttpService.serverGet($scope.serverUrl+urlController,(response) => {
+                    //parse the response here
+                    //Add it to local storage
+                    //$localStorage.Item= //some trimmed item from the response
+
+                });
+                //create a request object
+
 
                 //$scope.crates = cratesList;
+
+                //pull items from db
+
 
                        
             };
