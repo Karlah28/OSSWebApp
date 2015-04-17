@@ -22,12 +22,14 @@ var ossApp;
                     console.log($scope.itemArray);
                 };
                 $scope.removeItem = function (item) {
+                    for (var i = 0; i < $scope.itemArray.length; i++) {
+                        if ($scope.itemArray[i].name == item.name) {
+                            console.log("omg");
+                        }
+                    }
+                    ;
                 };
             }
-            StorageController.prototype.constructCrates = function () {
-                //this.cratesList = {
-                //}
-            };
             StorageController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',

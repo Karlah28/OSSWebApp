@@ -32,18 +32,15 @@ module ossApp.controllers {
                 $scope.itemArray.push(item);
                 console.log($scope.itemArray);
             };
+
             $scope.removeItem = (item) => {
+                for (var i = 0; i < $scope.itemArray.length; i++) {
+                    if ($scope.itemArray[i].name == item.name) {
+                        console.log("omg");
+                    }
+                };
 
-            };
-
-        }
-
-
-
-        private constructCrates() {
-            //this.cratesList = {
-
-            //}
+            }
         }
     }
 
