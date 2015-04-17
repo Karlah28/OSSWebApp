@@ -24,7 +24,12 @@ module ossApp {
                 .when("/itemAdministration", {
                 controller: "ossApp.controllers.ItemAdminController",
                 templateUrl: "/app/views/itemAdministration.html"
+                })
+                .when("/addInventory", {
+                controller: "ossApp.controllers.AddInventoryController",
+                templateUrl: "/app/views/addInventory.html"
             })
+
                 .otherwise({
                 redirectTo: '/home'
             });

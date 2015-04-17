@@ -33,6 +33,7 @@ module ossApp.controllers {
 
             $scope.loginUser = function() {
                 //create a registered user 
+              
                 
                 //Send it using the service
                 
@@ -40,6 +41,7 @@ module ossApp.controllers {
                 if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
                     console.log("login Success");
                     alert("login success!");
+                    LoginService.login(true);
                     $location.url('/dashboard');
                 }
                 else {                                                                
