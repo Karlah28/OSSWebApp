@@ -55,7 +55,6 @@ var ossApp;
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
                 '$scope',
-                '$localStorage'
             ];
             return StorageController;
         })();

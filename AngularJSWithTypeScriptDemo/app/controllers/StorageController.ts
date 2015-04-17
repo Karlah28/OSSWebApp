@@ -9,7 +9,7 @@ module ossApp.controllers {
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
             '$scope',
-            '$localStorage'
+            //'$localStorage'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
