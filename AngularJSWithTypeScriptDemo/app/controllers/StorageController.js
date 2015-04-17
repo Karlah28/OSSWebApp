@@ -11,9 +11,17 @@ var ossApp;
                 //this.NavbarService = NavbarService;
                 this.$scope = $scope;
                 //$scope.cratesList: Array<ossApp.Interfaces.Item>;
+                $scope.itemArray = [];
                 $scope.title = "Storage Management";
                 $scope.getCrates = function () {
                     //$scope.crates = cratesList;
+                };
+                //this adds an item to the array for the button to pass
+                $scope.addItem = function (item) {
+                    $scope.itemArray.push(item);
+                    console.log($scope.itemArray);
+                };
+                $scope.removeItem = function (item) {
                 };
             }
             StorageController.prototype.constructCrates = function () {

@@ -19,6 +19,7 @@ module ossApp.controllers {
             //this.NavbarService = NavbarService;
             
             //$scope.cratesList: Array<ossApp.Interfaces.Item>;
+            $scope.itemArray = [];
             $scope.title = "Storage Management";
             $scope.getCrates = () => {
 
@@ -26,8 +27,18 @@ module ossApp.controllers {
 
                        
             };
+            //this adds an item to the array for the button to pass
+            $scope.addItem = (item) => {
+                $scope.itemArray.push(item);
+                console.log($scope.itemArray);
+            };
+            $scope.removeItem = (item) => {
+
+            };
 
         }
+
+
 
         private constructCrates() {
             //this.cratesList = {
