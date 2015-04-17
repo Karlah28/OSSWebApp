@@ -7,9 +7,7 @@ var ossApp;
     var controllers;
     (function (controllers) {
         var LoginController = (function () {
-            function LoginController(NavbarService, HttpService, 
-                //LoginService: ossApp.Services.LoginService,
-                $scope, $location) {
+            function LoginController(NavbarService, HttpService, LoginService, $scope, $location) {
                 $scope.title = "Login or Register";
                 var favorites;
                 this.NavbarService = NavbarService;
@@ -23,7 +21,7 @@ var ossApp;
                     if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
                         console.log("login Success");
                         alert("login success!");
-                        //LoginService.login(true);
+                        LoginService.login(true);
                         $location.url('/dashboard');
                     }
                     else {
@@ -37,6 +35,7 @@ var ossApp;
             LoginController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
+                'ossApp.Services.LoginService',
                 '$scope',
                 '$location'
             ];

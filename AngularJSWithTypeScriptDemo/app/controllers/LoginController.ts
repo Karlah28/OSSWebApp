@@ -9,7 +9,7 @@ module ossApp.controllers {
         static $inject = [
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
-            //'ossApp.Services.LoginService',
+            'ossApp.Services.LoginService',
             '$scope',
             '$location'
             //'Login'
@@ -17,7 +17,7 @@ module ossApp.controllers {
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
-            //LoginService: ossApp.Services.LoginService,
+            LoginService: ossApp.Services.LoginService,
             $scope,
             $location
             //Login                                                
@@ -41,7 +41,7 @@ module ossApp.controllers {
                 if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
                     console.log("login Success");
                     alert("login success!");
-                    //LoginService.login(true);
+                    LoginService.login(true);
                     $location.url('/dashboard');
                 }
                 else {                                                                
