@@ -20,7 +20,7 @@ module ossApp.controllers {
 
             //this is your local storage
             
-            $scope.serverUrl = "localhost:51941";
+            $scope.serverUrl = "192.168.1.107:51941";
             
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;
@@ -51,22 +51,12 @@ module ossApp.controllers {
             $scope.itemArray = [];
             $scope.title = "Storage Management";
             $scope.getItems = () => {
+                console.log("bs")
                 //this is the Route specified in the server's controllers 
                 var urlController = "/InventoryController/ViewItems";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
                     $scope.allItems.push(JSON.parse(response));
-                    //response is a variable that stores the data gotten from the server
-                    //parse the response here
-                    //Add it to local storage
-                    //$localStorage.Item= //some trimmed item from the response
                 });
-                //create a request object
-
-
-                //$scope.crates = cratesList;
-
-                //pull items from db
-
 
                        
             };
