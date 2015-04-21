@@ -9,11 +9,13 @@ var ossApp;
         var LoginController = (function () {
             function LoginController(NavbarService, HttpService, 
                 //LoginService: ossApp.Services.LoginService,
-                $scope, $location) {
+                $scope, $location, $localStorage) {
                 $scope.title = "Login or Register";
                 var favorites;
                 this.NavbarService = NavbarService;
                 var url = "your local host";
+                $localStorage.message = "Karla";
+                $scope.karla = $localStorage.message;
                 $scope.userEmail = "karla@mavs.uta";
                 $scope.password = "admin";
                 $scope.loginUser = function () {
@@ -38,7 +40,8 @@ var ossApp;
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
                 '$scope',
-                '$location'
+                '$location',
+                '$localStorage'
             ];
             return LoginController;
         })();

@@ -11,7 +11,8 @@ module ossApp.controllers {
             'ossApp.Services.HttpService',
             //'ossApp.Services.LoginService',
             '$scope',
-            '$location'
+            '$location',
+            '$localStorage'
             //'Login'
         ];
         constructor(
@@ -19,7 +20,8 @@ module ossApp.controllers {
             HttpService: ossApp.Interfaces.HttpService,
             //LoginService: ossApp.Services.LoginService,
             $scope,
-            $location
+            $location,
+            $localStorage
             //Login                                                
             ) {
 
@@ -27,6 +29,10 @@ module ossApp.controllers {
             var favorites: Array<ossApp.Interfaces.ITrack>;
             this.NavbarService = NavbarService;
             var url = "your local host"; 
+            $localStorage.message = "Karla";
+
+
+            $scope.karla = $localStorage.message;
 
             $scope.userEmail = "karla@mavs.uta"
             $scope.password = "admin";
