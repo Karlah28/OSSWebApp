@@ -68,7 +68,7 @@
     <Content Include="app\views\editStorage.html" />
     <Content Include="app\views\landingPage.html" />
     <Content Include="app\views\login.html" />
-    <Content Include="app\views\userAdministration.html" />
+    <Content Include="app\views\manageUsers.html" />
     <Content Include="content\css\app.css" />
     <Content Include="content\css\bootstrap-theme.css" />
     <Content Include="content\css\bootstrap-theme.min.css" />
@@ -97,7 +97,7 @@
     <TypeScriptCompile Include="app\controllers\ViewInventoryController.ts" />
     <TypeScriptCompile Include="app\controllers\EditStorageController.ts" />
     <TypeScriptCompile Include="app\controllers\LoginController.ts" />
-    <TypeScriptCompile Include="app\controllers\UserAdminController.ts" />
+    <TypeScriptCompile Include="app\controllers\ManageUsersController.ts" />
     <TypeScriptCompile Include="app\interfaces\interfaces.ts" />
     <TypeScriptCompile Include="app\Models\Item.ts" />
     <TypeScriptCompile Include="app\services\HttpService.ts" />

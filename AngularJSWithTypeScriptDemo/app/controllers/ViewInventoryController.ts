@@ -18,8 +18,11 @@
         //Login                                                
             ) {
 
-
             $scope.title = "Outreach Inventory";
+
+            $scope.sendRequest = () => {
+                window.alert("Request Successfully Sent");
+            };
         }
 
     }

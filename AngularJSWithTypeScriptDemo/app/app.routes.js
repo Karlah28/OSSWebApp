@@ -12,13 +12,13 @@ var ossApp;
             }).when("/login", {
                 controller: "ossApp.controllers.LoginController",
                 templateUrl: "/app/views/login.html"
-            }).when("/storageManagement", {
+            }).when("/editStorage", {
                 controller: "ossApp.controllers.EditStorageController",
-                templateUrl: "/app/views/editStorageController.html"
+                templateUrl: "/app/views/editStorage.html"
             }).when("/userAdministration", {
-                controller: "ossApp.controllers.UserAdminController",
-                templateUrl: "/app/views/userAdministration.html"
-            }).when("/itemAdministration", {
+                controller: "ossApp.controllers.ManageUsersController",
+                templateUrl: "/app/views/manageUsers.html"
+            }).when("/viewInventory", {
                 controller: "ossApp.controllers.ViewInventoryController",
                 templateUrl: "/app/views/viewInventory.html"
             }).when("/addInventory", {

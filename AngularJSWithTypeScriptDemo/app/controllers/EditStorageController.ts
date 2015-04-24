@@ -61,9 +61,7 @@ module ossApp.controllers {
                        
             };
 
-            $scope.sendRequest = () => {
-                window.alert("Request Successfully Sent");
-            };
+
             //this adds an item to the array for the button to pass
             $scope.addItem = (item) => {
                 $scope.itemArray.push(item);

@@ -1,5 +1,5 @@
 ﻿module ossApp.controllers {
-    export class UserManagementController {
+    export class ManageUsersController {
         NavbarService: ossApp.Interfaces.INavbarService;
         static $inject = [
             "ossApp.Services.NavbarService",
@@ -14,14 +14,14 @@
         //$localStorage
             ) {
 
-            //var prospectUsers: Array<ossApp.Interfaces.ProspectUser>;
-
             $scope.prospects = new Array<ossApp.Interfaces.ProspectUser>();
+
+
 
 
 
 
         }
     }
-    angular.module("ossApp").controller("ossApp.controllers.userAdminController", UserManagementController);
+    angular.module("ossApp").controller("ossApp.controllers.ManageUsersController", ManageUsersController);
 } 
