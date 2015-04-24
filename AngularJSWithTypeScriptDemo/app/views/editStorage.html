@@ -20,8 +20,8 @@
         <ul class="nav nav-tabs">
             <li role="presentation" class="active" ng-model="items" ng-click="items=true; crates=false; projects=false; getItems()"><a href="">Items</a></li>
             <!--<li role="presentation" class="active" ng-model="items" ng-click="items=true; crates=false; projects=false;"><a href="">Items</a></li>-->
-            <li role="presentation" ng-model="crates" ng-click="crates=true; items=false; projects=false"><a href="">Crates</a></li>
-            <li role="presentation" ng-model="projects" ng-click="projects=true; items=false; crates=false"><a href="">Projects</a></li>
+            <li role="presentation" ng-model="crates" ng-click="crates=true; items=false; projects=false; getCrates()"><a href="">Crates</a></li>
+            <li role="presentation" ng-model="projects" ng-click="projects=true; items=false; crates=false; getProjects()"><a href="">Projects</a></li>
         </ul>
     </div>
     <!--this is just dummy data used to test the table-->
@@ -56,19 +56,19 @@
             <div class="panel panel-default">
                 <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
-                    <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
-                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse">Quantity</a></th>
+                    <th><a href="" ng-click="predicate ='CrateID'; reverse=!reverse">Crate ID</a></th>
+                    <th><a href="">Click for Item List</a></th>
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
-                    <tr class="animate-repeat" ng-repeat="item in allCrates | orderBy:predicate:reverse">
+                    <tr class="animate-repeat" ng-repeat="crate in allCrates | orderBy:predicate:reverse">
                         <td>
-                            <input type="checkbox" name="identifier" ng-value="item" ng-click="addItem(item)" />
+                            <input type="checkbox" name="identifier" ng-value="item" ng-click="addCrate(crate)" />
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
                         </td>
                         <td>
-                            {{item.ItemName}}
+                            {{crate.CrateID}}
                         </td>
                         <td>
-                            {{item.ItemQuantity}}
+                            <a href="">Item List</a><!-- want this to be clicked and have a modal pop up-->
                         </td>
                     </tr>
                 </table>
@@ -82,6 +82,7 @@
                     <th data-checkbox="true"></th>
                     <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
                     <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse">Quantity</a></th>
+                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse"</a>Availability</th>
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
                     <tr class="animate-repeat" ng-repeat="item in allProjects | orderBy:predicate:reverse">
                         <td>
