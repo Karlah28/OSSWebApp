@@ -12,13 +12,15 @@ var ossApp;
                 $scope.serverUrl = "192.168.1.107:51941/api";
                 //var favorites: Array<ossApp.Interfaces.ITrack>;
                 //this.NavbarService = NavbarService;
-                $scope.allItems = [
-                    { ItemName: 'Scissors', ItemQuantity: 25, gender: 'boy' },
-                    { ItemName: 'Tables', ItemQuantity: 1, gender: 'girl' },
-                    { ItemName: 'Pencils', ItemQuantity: 30, gender: 'girl' },
-                    { ItemName: 'Shirts', ItemQuantity: 2, gender: 'girl' },
-                    { ItemName: 'Notebooks', ItemQuantity: 32, gender: 'girl' }
+                /*$scope.allItems = [
+                { ItemName: 'Scissors', ItemQuantity: 25, gender: 'boy' },
+                { ItemName: 'Tables', ItemQuantity:1, gender:'girl' },
+                { ItemName: 'Pencils', ItemQuantity: 30, gender: 'girl' },
+                { ItemName: 'Shirts', ItemQuantity: 2, gender: 'girl' },
+                { ItemName: 'Notebooks', ItemQuantity: 32, gender: 'girl' }
                 ];
+                */
+                $scope.allItems = [];
                 $scope.allCrates = [
                     { ItemName: 'Crate 1', ItemQuantity: 25, gender: 'boy' },
                     { ItemName: 'Crate 2', ItemQuantity: 1, gender: 'girl' },
@@ -39,7 +41,9 @@ var ossApp;
                     //this is the Route specified in the server's controllers 
                     var urlController = "/InventoryController/ViewItems";
                     HttpService.serverGet($scope.serverUrl + urlController, function (response) {
-                        $scope.allItems.push(JSON.parse(response));
+                        for (var i = 0; i < response.length; i++) {
+                            $scope.allItems.push(response[i]);
+                        }
                     });
                 };
                 $scope.sendRequest = function () {

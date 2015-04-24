@@ -24,13 +24,15 @@ module ossApp.controllers {
             
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;
-            $scope.allItems = [
+            /*$scope.allItems = [
             { ItemName: 'Scissors', ItemQuantity: 25, gender: 'boy' },
             { ItemName: 'Tables', ItemQuantity:1, gender:'girl' },
             { ItemName: 'Pencils', ItemQuantity: 30, gender: 'girl' },
             { ItemName: 'Shirts', ItemQuantity: 2, gender: 'girl' },
             { ItemName: 'Notebooks', ItemQuantity: 32, gender: 'girl' }
             ];
+            */
+            $scope.allItems = []
 
             $scope.allCrates = [
                 { ItemName: 'Crate 1', ItemQuantity: 25, gender: 'boy' },
@@ -45,8 +47,6 @@ module ossApp.controllers {
                 { ItemName: 'Outreach Sunday', ItemQuantity: 1, gender: 'girl' },
                 { ItemName: 'UTA Career Fair', ItemQuantity: 30, gender: 'girl' },
             ];
-
-
             //$scope.cratesList: Array<ossApp.Interfaces.Item>;
             $scope.itemArray = [];
             $scope.title = "Storage Management";
@@ -55,7 +55,11 @@ module ossApp.controllers {
                 //this is the Route specified in the server's controllers 
                 var urlController = "/InventoryController/ViewItems";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
-                    $scope.allItems.push(JSON.parse(response));
+                    //$scope.theItems.push(JSON.parse(response));
+                    for (var i = 0; i < response.length; i++) {
+                        $scope.allItems.push(response[i]);
+                        //console.log($scope.allItems)
+                    } 
                 });
 
                        
