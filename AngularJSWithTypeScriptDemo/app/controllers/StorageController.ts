@@ -20,7 +20,7 @@ module ossApp.controllers {
 
             //this is your local storage
             
-            $scope.serverUrl = "192.168.1.107:51941";
+            $scope.serverUrl = "192.168.1.107:51941/api";
             
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;

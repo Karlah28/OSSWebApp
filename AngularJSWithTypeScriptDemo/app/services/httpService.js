@@ -8,7 +8,7 @@ var ossApp;
                 this.httpService = $http;
             }
             HttpService.prototype.serverGet = function (url, callback) {
-                this.httpService.get(url).success(function (data, status, headers, config) {
+                this.httpService.get("http://localhost:51941/api/Inventory/ViewItems").success(function (data, status, headers, config) {
                     if (status === 200) {
                         callback(data, status);
                     }
