@@ -6,6 +6,6 @@ declare module ossApp.controllers {
     class LoginController {
         NavbarService: ossApp.Interfaces.INavbarService;
         static $inject: string[];
-        constructor(NavbarService: ossApp.Interfaces.INavbarService, HttpService: ossApp.Interfaces.HttpService, $scope: any, $location: any);
+        constructor(NavbarService: ossApp.Interfaces.INavbarService, HttpService: ossApp.Interfaces.HttpService, $scope: any, $location: any, $localStorage: any);
     }
 }
