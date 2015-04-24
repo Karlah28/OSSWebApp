@@ -10,7 +10,8 @@ module ossApp.Services {
         }
 
         public serverGet(url: string, callback: (data: any, status: any) => void): void {
-            this.httpService.get(url).
+            this.httpService.get("http://localhost:51941/api/Inventory/ViewItems").
+            //this.httpService.get("http://www.w3schools.com/angular/customers.php").
                 success((data: any, status: any, headers: any, config: any) => {
                 if (status === 200) {
                     callback(data, status);
