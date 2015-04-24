@@ -18,6 +18,15 @@ declare module ossApp.Interfaces {
         phoneNumber: number;
         DOB: string;
     }
+    interface ProspectUser {
+        firstName: string;
+        lastName: string;
+        password: string;
+        email: string;
+        organizatio: string;
+        phoneNumber: string;
+        DOB: string;
+    }
     interface HttpService {
         serverGet(url: string, callback: (data: any, status: any) => void): void;
         serverPost(url: string, stratParams: any, callback: (data: any, status: any) => void): void;

@@ -14,10 +14,14 @@
         //$localStorage
             ) {
 
-            $scope.allUsers = [{}];
+            //var prospectUsers: Array<ossApp.Interfaces.ProspectUser>;
+
+            $scope.prospects = new Array<ossApp.Interfaces.ProspectUser>();
+
+
+
+
         }
-
-
     }
     angular.module("ossApp").controller("ossApp.controllers.userAdminController", UserManagementController);
 } 

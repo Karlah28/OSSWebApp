@@ -1,5 +1,5 @@
 ﻿module ossApp.controllers {
-    export class UserAdminController {
+    export class ViewInventoryController {
         NavbarService: ossApp.Interfaces.INavbarService;
         static $inject = [
             "ossApp.Services.NavbarService",
@@ -19,9 +19,9 @@
             ) {
 
 
-            $scope.title = "Inventory Administration";
+            $scope.title = "Outreach Inventory";
         }
 
     }
-    angular.module("ossApp").controller("ossApp.controllers.UserAdminController", UserAdminController);
+    angular.module("ossApp").controller("ossApp.controllers.ViewInventoryController", ViewInventoryController);
 }  

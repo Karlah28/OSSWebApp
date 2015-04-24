@@ -14,16 +14,16 @@ module ossApp {
                 templateUrl: "/app/views/login.html"
                 })
                 .when("/storageManagement", {
-                controller: "ossApp.controllers.StorageController",
-                templateUrl: "/app/views/storageManagement.html"
+                controller: "ossApp.controllers.EditStorageController",
+                templateUrl: "/app/views/editStorageController.html"
                 })
                 .when("/userAdministration", {
                 controller: "ossApp.controllers.UserAdminController",
                 templateUrl: "/app/views/userAdministration.html"
                 })
                 .when("/itemAdministration", {
-                controller: "ossApp.controllers.ItemAdminController",
-                templateUrl: "/app/views/itemAdministration.html"
+                controller: "ossApp.controllers.ViewInventoryController",
+                templateUrl: "/app/views/viewInventory.html"
                 })
                 .when("/addInventory", {
                 controller: "ossApp.controllers.AddInventoryController",

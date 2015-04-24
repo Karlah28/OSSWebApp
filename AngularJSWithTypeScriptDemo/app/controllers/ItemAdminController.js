@@ -2,22 +2,22 @@ var ossApp;
 (function (ossApp) {
     var controllers;
     (function (controllers) {
-        var UserAdminController = (function () {
-            function UserAdminController(NavbarService, HttpService, 
+        var ViewInventoryController = (function () {
+            function ViewInventoryController(NavbarService, HttpService, 
                 //LoginService: ossApp.Services.LoginService,
                 $scope, $location) {
                 $scope.title = "Inventory Administration";
             }
-            UserAdminController.$inject = [
+            ViewInventoryController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
                 '$scope',
                 '$location'
             ];
-            return UserAdminController;
+            return ViewInventoryController;
         })();
-        controllers.UserAdminController = UserAdminController;
-        angular.module("ossApp").controller("ossApp.controllers.UserAdminController", UserAdminController);
+        controllers.ViewInventoryController = ViewInventoryController;
+        angular.module("ossApp").controller("ossApp.controllers.ViewInventoryController", ViewInventoryController);
     })(controllers = ossApp.controllers || (ossApp.controllers = {}));
 })(ossApp || (ossApp = {}));
 //# sourceMappingURL=ItemAdminController.js.map

@@ -2,7 +2,7 @@
 /// <reference path="../interfaces/interfaces.ts" />
 /// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
 module ossApp.controllers {
-    export class StorageController {
+    export class EditStorageController {
 
         NavbarService: ossApp.Interfaces.INavbarService;
         static $inject = [
@@ -84,5 +84,5 @@ module ossApp.controllers {
         }
     }
 
-    angular.module("ossApp").controller("ossApp.controllers.StorageController", StorageController);
+    angular.module("ossApp").controller("ossApp.controllers.EditStorageController", EditStorageController);
 }

@@ -14,8 +14,8 @@ var ossApp;
                 var favorites;
                 this.NavbarService = NavbarService;
                 var url = "your local host";
-                $localStorage.message = "Karla";
-                $scope.karla = $localStorage.message;
+                //$localStorage.message = "Karla";
+                //$scope.karla = $localStorage.message;
                 $scope.userEmail = "karla@mavs.uta";
                 $scope.password = "admin";
                 $scope.loginUser = function () {

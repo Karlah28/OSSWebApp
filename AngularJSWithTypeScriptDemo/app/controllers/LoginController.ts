@@ -29,10 +29,11 @@ module ossApp.controllers {
             var favorites: Array<ossApp.Interfaces.ITrack>;
             this.NavbarService = NavbarService;
             var url = "your local host"; 
-            $localStorage.message = "Karla";
+            
+            //$localStorage.message = "Karla";
 
 
-            $scope.karla = $localStorage.message;
+            //$scope.karla = $localStorage.message;
 
             $scope.userEmail = "karla@mavs.uta"
             $scope.password = "admin";

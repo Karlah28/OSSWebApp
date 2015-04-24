@@ -4,8 +4,9 @@ var ossApp;
     (function (controllers) {
         var UserManagementController = (function () {
             function UserManagementController(NavbarService, HttpService, $scope) {
+                //var prospectUsers: Array<ossApp.Interfaces.ProspectUser>;
                 this.$scope = $scope;
-                $scope.allUsers = [{}];
+                $scope.prospects = new Array();
             }
             UserManagementController.$inject = [
                 "ossApp.Services.NavbarService",

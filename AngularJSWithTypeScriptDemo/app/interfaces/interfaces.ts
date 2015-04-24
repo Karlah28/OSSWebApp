@@ -15,13 +15,23 @@
         password: string;
     }
 
-    export interface NewUser {
+    export interface NewUser {                                                                                                                 
         username: string;
         password: string;
         organization: string;
         phoneNumber: number;
         DOB: string;
 
+    }
+
+    export interface ProspectUser {
+        firstName: string;
+        lastName: string;
+        password: string;
+        email: string;
+        organizatio: string;
+        phoneNumber: string;
+        DOB: string;
     }
 
     export interface HttpService {
