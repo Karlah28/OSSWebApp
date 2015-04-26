@@ -1,3 +1,5 @@
+/// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../../scripts/typings/jquery/jquery.d.ts" />
 var ossApp;
 (function (ossApp) {
     var controllers;
@@ -23,26 +25,29 @@ var ossApp;
                         $scope.prospects.push($localStorage.potentialUsers[i]);
                     }
                 };
-                var tempIndex = new Array();
-                $scope.addTemp = function (index) {
+                $scope.tempIndex = new Array();
+                $scope.addTemp = function (value) {
                     //check if item is repeated
-                    //if (tempIndex.length != 0) {
-                    //    if (tempIndex[index] !== undefined || tempIndex[index] !== null) {
-                    //        tempIndex.splice(tempIndex[index], 1);
-                    //    }
-                    //}
-                    //do something in array
-                    //$scope.TempProspects.push(prospect);
+                    if ($scope.tempIndex.length > 0) {
+                        //if element doesn't exist
+                        if ($scope.tempIndex.indexOf(value) === -1) {
+                            $scope.tempIndex.push(value);
+                        }
+                    }
+                    else {
+                        $scope.tempIndex.push(value);
+                    }
                 };
-                $scope.removeTemp = function (index) {
+                $scope.removeTemp = function (value) {
                     //don't remove index if array is empty
-                    //if (tempIndex.length != 0) {
-                    //    if (tempIndex[index] !== undefined || tempIndex[index] !== null) {
-                    //        tempIndex.splice(tempIndex[index], 1);
-                    //    }
-                    //}
-                    //do something in array
-                    //$scope.TempProspects.push(prospect);
+                    if ($scope.tempIndex.length > 0) {
+                        //if element exist
+                        var index = $scope.tempIndex.indexOf(value);
+                        if (index !== -1) {
+                            //remove element
+                            $scope.tempIndex.splice(index, 1);
+                        }
+                    }
                 };
                 //send approved users
                 $scope.approve = function () {
