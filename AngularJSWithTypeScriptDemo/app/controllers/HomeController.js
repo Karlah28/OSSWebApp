@@ -6,20 +6,30 @@ var ossApp;
     var controllers;
     (function (controllers) {
         var HomeController = (function () {
-            function HomeController(NavbarService, HttpService, $scope) {
+            function HomeController(NavbarService, HttpService, $scope, $localStorage) {
                 //var favorites: Array<ossApp.Interfaces.ITrack>;
                 //this.NavbarService = NavbarService;
                 //$scope.getFavourites = () => {
                 //    $scope.favorites = this.NavbarService.getPlayList();
                 this.$scope = $scope;
                 //};
+                var baseUrl = "192.168.1.107:51941/api";
                 $scope.title = "Welcome to Outreach Storage System";
                 $scope.image = "../../images/uta-image.jpg";
+                $scope.getUsers = function () {
+                    var getUsersUrl = "";
+                    var recentUsers = HttpService.serverGet(baseUrl + getUsersUrl, function (response) {
+                        //clear cache before populating
+                        $localStorage.recentUsers = null;
+                        $localStorage.recentUsers = response;
+                    });
+                };
             }
             HomeController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
-                '$scope'
+                '$scope',
+                '$localStorage'
             ];
             return HomeController;
         })();

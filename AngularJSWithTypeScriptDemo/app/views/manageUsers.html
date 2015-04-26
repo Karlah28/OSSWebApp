@@ -1,23 +1,47 @@
 ﻿<div class="bodyContainer">
-    <button type="button" onclick="" class="btn btn-default">Approve</button>
-    <button type="button" onclick="" class="btn btn-default">Deny</button>
+    <div>
+        <center>
+            <h1 class="ossTitle">{{title}}</h1>
+        </center>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-success btn-lg" aria-expanded="false" ng-click="approve()">Approve</button>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger btn-lg" aria-expanded="false" ng-click="deny()">Deny</button>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="panel panel-default">
-        <div class="panel-heading">User Account Requests</div>
+        <div class="panel-heading">
+            <center>
+                <h3><b>User Account Requests</b></h3>
+            </center>
+        </div>
         <table class="table">
+            <th><a href="" ng-click="predicate =''; reverse=!reverse"></a></th>
             <th><a href="" ng-click="predicate =''; reverse=!reverse">First Name</a></th>
             <th><a href="" ng-click="predicate =''; reverse=!reverse">Last Name</a></th>
             <th><a href="" ng-click="predicate =''; reverse=!reverse">Email</a></th>
             <th><a href="" ng-click="predicate =''; reverse=!reverse">Phone Number</a></th>
-            <tr class="animate-repeat" ng-repeat="friend in friends | orderBy:predicate:reverse">
+            <tr class="animate-repeat" ng-repeat="prospect in prospects | orderBy:predicate:reverse">
                 <td>
-                    <input type="checkbox" name="identifier" ng-value="friend" ng-click="addItem(friend)" />
+                    <input type="checkbox" name="identifier" ng-value="prospect" ng-click=addTemp($index) />
                     <!-- the ng-click calls a function in the controller that adds the item to an array-->
                 </td>
                 <td>
-                    {{friend.name}}
+                    {{prospect.FirstName}}
                 </td>
                 <td>
-                    {{friend.age}}
+                    {{prospect.LastName}}
+                </td>
+                <td>
+                    {{prospect.Email}}
+                </td>
+                <td>
+                    {{prospect.PhoneNumber}}
                 </td>
             </tr>
         </table>

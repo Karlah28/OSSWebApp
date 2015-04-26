@@ -6,6 +6,6 @@ declare module ossApp.controllers {
         private $scope;
         NavbarService: ossApp.Interfaces.INavbarService;
         static $inject: string[];
-        constructor(NavbarService: ossApp.Interfaces.INavbarService, HttpService: ossApp.Interfaces.HttpService, $scope: any);
+        constructor(NavbarService: ossApp.Interfaces.INavbarService, HttpService: ossApp.Interfaces.HttpService, $scope: any, $localStorage: any);
     }
 }

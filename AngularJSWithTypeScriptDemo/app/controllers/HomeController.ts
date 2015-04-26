@@ -8,12 +8,14 @@ module ossApp.controllers {
         static $inject = [
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
-            '$scope'            
+            '$scope',
+            '$localStorage'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
-            private $scope
+            private $scope,
+            $localStorage
             ) {
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;
@@ -21,10 +23,24 @@ module ossApp.controllers {
             //    $scope.favorites = this.NavbarService.getPlayList();
 
             //};
+            
+            var baseUrl = "192.168.1.107:51941/api";
+
             $scope.title = "Welcome to Outreach Storage System";
             $scope.image = "../../images/uta-image.jpg";
+
+            $scope.getUsers = () => {
+                var getUsersUrl = "";
+                var recentUsers = HttpService.serverGet(baseUrl + getUsersUrl,(response) => {
+                    //clear cache before populating
+                    $localStorage.recentUsers = null;
+                    $localStorage.recentUsers = response;
+                });
+            };
+
+
         }
-      
+
     }
 
     angular.module("ossApp").controller("ossApp.controllers.HomeController", HomeController);

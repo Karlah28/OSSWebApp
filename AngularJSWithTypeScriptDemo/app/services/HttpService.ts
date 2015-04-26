@@ -10,15 +10,16 @@ module ossApp.Services {
         }
 
         public serverGet(url: string, callback: (data: any, status: any) => void): void {
-            this.httpService.get("http://localhost:51941/api/Inventory/ViewItems").
-            //this.httpService.get("http://www.w3schools.com/angular/customers.php").
+            console.log("URL -->", url);
+            //this.httpService.get("http://localhost:51941/api/Inventory/ViewItems").
+            this.httpService.get(url).
                 success((data: any, status: any, headers: any, config: any) => {
                 if (status === 200) {
                     callback(data, status);
                 } else {
                     callback(data, status);
                 }
-                }).error((data: any, status: any, headers: any, config: any) => {
+            }).error((data: any, status: any, headers: any, config: any) => {
                 console.log("error");
             });
         }
@@ -31,7 +32,7 @@ module ossApp.Services {
                 if (status === 200) {
                     callback(data, status);
                 } else {
-                   console.log("server call failed, Status - " + status.toString());
+                    console.log("server call failed, Status - " + status.toString());
                     callback(data, status);
                 }
             }).error((data: any, status: any, headers: any, config: any) => {
