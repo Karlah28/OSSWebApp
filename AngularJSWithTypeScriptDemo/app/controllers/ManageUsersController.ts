@@ -34,30 +34,31 @@
                     $scope.prospects.push($localStorage.potentialUsers[i]);
                 }
             }
-            
-            //$scope.prospects.push(
-            //    {
-            //        FirstName: "Karla",
-            //        LastName: "Hernandez",
-            //        Email: "karla.hernandez@mavs.uta.edu",
-            //        PhoneNumber: "817456623"
-            //    },
-            //    {
-            //        FirstName: "Robert",
-            //        LastName: "Calvert",
-            //        Email: "sample@mavs.uta.edu",
-            //        PhoneNumber: "817456623"
-            //    },
-            //    {
-            //        FirstName: "Caleb",
-            //        LastName: "Goodman",
-            //        Email: "caleb@gmail.com",
-            //        PhoneNumber: "554522150"
-            //    });
+            var tempIndex = new Array();
 
             $scope.addTemp = (index: any) => {
+                //check if item is repeated
 
-               //do something in array
+                //if (tempIndex.length != 0) {
+                //    if (tempIndex[index] !== undefined || tempIndex[index] !== null) {
+                //        tempIndex.splice(tempIndex[index], 1);
+                //    }
+                //}
+
+                //do something in array
+                //$scope.TempProspects.push(prospect);
+            };
+
+            $scope.removeTemp = (index: any) => {
+                //don't remove index if array is empty
+
+                //if (tempIndex.length != 0) {
+                //    if (tempIndex[index] !== undefined || tempIndex[index] !== null) {
+                //        tempIndex.splice(tempIndex[index], 1);
+                //    }
+                //}
+
+                //do something in array
                 //$scope.TempProspects.push(prospect);
             };
 
