@@ -28,7 +28,7 @@
             <th><a href="" ng-click="predicate =''; reverse=!reverse">Phone Number</a></th>
             <tr class="animate-repeat" ng-repeat="prospect in prospects | orderBy:predicate:reverse">
                 <td>
-                    <input type="checkbox" name="identifier" ng-value="prospect" ng-click=addTemp($index) />
+                    <!--<input type="checkbox" name="identifier" ng-value="prospect" ng-click=addTemp($index) />-->
                     <!-- the ng-click calls a function in the controller that adds the item to an array-->
                 </td>
                 <td>
