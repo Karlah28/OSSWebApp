@@ -4,27 +4,37 @@
             <h1 class="ossTitle">{{title}}</h1>
         </center>
     </div>
+       
+
     
 
-    <!-- activation buttons for reserving stuff-->
-    <div class="btn-group" role="group">
+    <!-- activation buttons for editing stuff. need to have different groups appear to have different results when different
+        things are dealth with-->
+    <div ng-if="items" class="btn-group" role="group">
         <button type="button" class="btn btn-default">Edit</button>
         <button type="button" class="btn btn-default">Delete</button>
     </div>
-
+    <div ng-if="crates" class="btn-group" role="group">
+        <button type="button" class="btn btn-default">Edit</button>
+        <button type="button" class="btn btn-default">Delete</button>
+    </div>
+    <div ng-if="projects" class="btn-group" role="group">
+        <button type="button" class="btn btn-default">Edit</button>
+        <button type="button" class="btn btn-default">Delete</button>
+    </div>
 
     <br />
     <br />
 
     <div>
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active" ng-model="items" ng-click="items=true; crates=false; projects=false; getItems()"><a href="">Items</a></li>
+            <li role="presentation" ng-model="items" ng-click="items=true; crates=false; projects=false; getItems()"><a href="">Items</a></li>
             <!--<li role="presentation" class="active" ng-model="items" ng-click="items=true; crates=false; projects=false;"><a href="">Items</a></li>-->
-            <li role="presentation" ng-model="crates" ng-click="crates=true; items=false; projects=false; getCrates()"><a href="">Crates</a></li>
-            <li role="presentation" ng-model="projects" ng-click="projects=true; items=false; crates=false; getProjects()"><a href="">Projects</a></li>
+            <li role="presentation" ng-model="crates" ng-click="crates=true; items=false; projects=false;"><a href="">Crates</a></li>
+            <li role="presentation" ng-model="projects" ng-click="projects=true; items=false; crates=false;"><a href="">Projects</a></li>
         </ul>
     </div>
-    <!--this is just dummy data used to test the table-->
+
     <div>
         <span ng-if="items">
             <!-- ITEM LIST -->
@@ -52,8 +62,8 @@
         </span>
         <span ng-if="crates">
             <!-- CRATE LIST -->
-            <div class="panel-heading">Crates</div>
             <div class="panel panel-default">
+                <div class="panel-heading">Crates</div>
                 <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
                     <th><a href="" ng-click="predicate ='CrateID'; reverse=!reverse">Crate ID</a></th>
@@ -68,16 +78,20 @@
                             {{crate.CrateID}}
                         </td>
                         <td>
-                            <a href="">Item List</a><!-- want this to be clicked and have a modal pop up-->
+                            <button type="button" class="btn btn-sm" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
+                                Item List
+                            </button><!-- want this to be clicked and have a modal pop up with an item list-->
                         </td>
                     </tr>
                 </table>
             </div>
         </span>
+
+
         <span ng-if="projects">
             <!-- PROJECTS LIST -->
-            <div class="panel-heading">Projects</div>
             <div class="panel panel-default">
+                <div class="panel-heading">Projects</div>
                 <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
                     <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
@@ -101,4 +115,35 @@
         </span>
         <br />
         <br />
-    </div>
+    </div> <!---end panels-->
+
+
+
+
+    <!-- modal for crate item list display-->
+    <div class="fade modal" id="crateListModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">Close</button>
+                    <h4 class="modal-title">Item List</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div><!-- end page or rather the area everything is in-->
+
+
+
+
+
+
+
+

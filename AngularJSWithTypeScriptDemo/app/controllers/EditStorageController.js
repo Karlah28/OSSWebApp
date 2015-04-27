@@ -19,6 +19,10 @@ var ossApp;
                 $scope.itemArray = []; //array to contain all checkboxed items
                 //$scope.cratesList: Array<ossApp.Interfaces.Item>;
                 $scope.title = "Storage Management";
+                $scope.allItems = [{ ItemName: "this", ItemQuantity: 4 }];
+                $scope.allCrates = [
+                    { CrateID: 1, CrateStatus: 1, ItemList: { Label: "something", Quantity: 4 } }
+                ]; //1 for status is available -1 for not available
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FUNCTIONS FOR POPULATION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 $scope.getItems = function () {
                     console.log("bs");

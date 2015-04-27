@@ -29,11 +29,9 @@ module ossApp {
                 controller: "ossApp.controllers.AddInventoryController",
                 templateUrl: "/app/views/addInventory.html"
             })
-
                 .otherwise({
                 redirectTo: '/home'
             });
-                
            
         }
     }
