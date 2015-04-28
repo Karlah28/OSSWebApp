@@ -4,8 +4,7 @@
             <h1 class="ossTitle">{{title}}</h1>
         </center>
     </div>
-       
-
+   
     
 
     <!-- activation buttons for editing stuff. need to have different groups appear to have different results when different
@@ -22,6 +21,11 @@
         <button type="button" class="btn btn-default">Edit</button>
         <button type="button" class="btn btn-default">Delete</button>
     </div>
+
+
+    
+
+
 
     <br />
     <br />
@@ -78,9 +82,9 @@
                             {{crate.CrateID}}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
-                                Item List
-                            </button><!-- want this to be clicked and have a modal pop up with an item list-->
+                            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#crateListModal">
+                                List
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -117,15 +121,12 @@
         <br />
     </div> <!---end panels-->
 
-
-
-
     <!-- modal for crate item list display-->
     <div class="fade modal" id="crateListModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">Close</button>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
                     <h4 class="modal-title">Item List</h4>
                 </div>
                 <div class="modal-body">
