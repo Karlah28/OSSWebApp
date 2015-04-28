@@ -32,6 +32,7 @@
 
     <div>
         <ul class="nav nav-tabs">
+            <!-- need to readd functionality to this-->
             <li role="presentation" ng-model="items" ng-click="items=true; crates=false; projects=false; getItems()"><a href="">Items</a></li>
             <!--<li role="presentation" class="active" ng-model="items" ng-click="items=true; crates=false; projects=false;"><a href="">Items</a></li>-->
             <li role="presentation" ng-model="crates" ng-click="crates=true; items=false; projects=false;"><a href="">Crates</a></li>
@@ -82,8 +83,8 @@
                             {{crate.CrateID}}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#crateListModal">
-                                List
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListModal" ng-click="compileModalItems(crate.ItemList)">
+                                Item List
                             </button>
                         </td>
                     </tr>
@@ -98,20 +99,25 @@
                 <div class="panel-heading">Projects</div>
                 <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
-                    <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
-                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse">Quantity</a></th>
-                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse"</a>Availability</th>
+                    <th><a href="" ng-click="predicate ='ProjectName'; reverse=!reverse">Label</a></th>
+                    <th><a href="" ng-click="predicate='Description'; reverse=!reverse">Quantity</a></th>
+                    <th><a href=""></a>Item List</th>
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
-                    <tr class="animate-repeat" ng-repeat="item in allProjects | orderBy:predicate:reverse">
+                    <tr class="animate-repeat" ng-repeat="project in allProjects | orderBy:predicate:reverse">
                         <td>
                             <input type="checkbox" name="identifier" ng-value="item" ng-click="addItem(item)" />
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
                         </td>
                         <td>
-                            {{item.ItemName}}
+                            {{project.ProjectName}}
                         </td>
                         <td>
-                            {{item.ItemQuantity}}
+                            {{project.Description}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListModal" ng-click="compileProjectModalItems(project)">
+                                Item List
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -130,7 +136,40 @@
                     <h4 class="modal-title">Item List</h4>
                 </div>
                 <div class="modal-body">
-                    <p>One fine body</p>
+                    <table class="table" ng-init="modalReverse=true">
+                        <th><a href="" ng-click="predicate ='Label'; modalReverse=!modalReverse">Label</a></th>
+                        <th><a href="" ng-click="predicate ='Quantity'; modalReverse=!modalReverse">Quantity</a></th>
+                        <tr ng-repeat="modalItem in modalItems">
+                            <td>{{modalItem.Label}}</td>
+                            <td>{{modalItem.Quantity}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- modal 2-->
+    <div class="fade modal" id="projectListModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4 class="modal-title">Item List</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table" ng-init="modalReverse=true">
+                        <th><a href="" ng-click="predicate ='modalItem.label'; modalReverse=!modalReverse">Label</a></th>
+                        <th><a href="" ng-click="predicate ='modalItem.quantity'; modalReverse=!modalReverse">Quantity</a></th>
+                        <tr ng-repeat="modalItem in modalItems">
+                            <td>{{modalItem.label}}</td>
+                            <td>{{modalItem.quantity}}</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

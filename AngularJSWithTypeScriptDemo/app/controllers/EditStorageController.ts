@@ -37,8 +37,11 @@ module ossApp.controllers {
 
             $scope.allItems = [{ ItemName: "this", ItemQuantity: 4 }];
             $scope.allCrates = [
-                { CrateID: 1, CrateStatus: 1, ItemList: { Label: "something", Quantity: 4 } }
+                { CrateID: 1, CrateStatus: 1, ItemList: [{ Label: "something", Quantity: 4 }, { Label: "something2", Quantity: 10 }, { Label: "something3", Quantity: 99 }] }
             ]//1 for status is available -1 for not available
+            $scope.allProjects = [
+                { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] }
+                ]
 
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FUNCTIONS FOR POPULATION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -87,9 +90,19 @@ module ossApp.controllers {
                     if ($scope.itemArray[i].name == item.name) {
                         console.log("omg");
                     }
-                };
+                }
+            };
+            $scope.compileModalItems = (itemList) => {
+                $scope.modalItems = itemList;
+            };
 
-            }
+            $scope.modalItems = [];
+            $scope.compileProjectModalItems = (project) => {
+                $scope.modalItems = [];
+                for (var i = 0; i < project.ItemList.length; i++) {
+                    $scope.modalItems.push({label: project.ItemList[i], quantity: project.QuantityNeeded[i]});
+                }
+            };
         }
     }
 
