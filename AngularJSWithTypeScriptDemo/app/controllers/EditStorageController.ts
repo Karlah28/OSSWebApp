@@ -35,7 +35,10 @@ module ossApp.controllers {
             $scope.title = "Storage Management";
 
 
-            $scope.allItems = [{ ItemName: "this", ItemQuantity: 4 }];
+            $scope.allItems = [
+                { ItemName: "this", ItemQuantity: 4, EPCData: "l;aksjdflkj21" },
+                { ItemName: "this2", ItemQuantity: 20, EPCData: "al;sjoiwer" }
+            ];
             $scope.allCrates = [
                 { CrateID: 1, CrateStatus: 1, ItemList: [{ Label: "something", Quantity: 4 }, { Label: "something2", Quantity: 10 }, { Label: "something3", Quantity: 99 }] }
             ]//1 for status is available -1 for not available
@@ -77,21 +80,71 @@ module ossApp.controllers {
 
 
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>VARIOUS FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            $scope.addItem = (item) => {
-                $scope.itemArray.push(item);
-                console.log($scope.itemArray);
-            };
+            
+            //use splice for this function... also make it toggle
+            //this function is used to toggle items being added to an array when their checkbox is checked
 
-            $scope.removeItem = (item) => {
-                for (var i = 0; i < $scope.itemArray.length; i++) {
-                    //ATTENTION MOTHER TRUCKER >>>> THIS IS IMPORTANT
-                    //need this attribute to be made relevant ($scope.itemArray[i]. << something proper here
-                    //also need to add functions for adding and removing crates to the list
-                    if ($scope.itemArray[i].name == item.name) {
-                        console.log("omg");
+
+            $scope.checkedItems = [];
+            $scope.toggleItem = (item) => {
+                var found = 0
+                var index = 0
+                for (var i = 0; i < $scope.checkedItems.length; i++) {
+                    if ($scope.checkedItems[i] == item) {
+                        found = 1;
+                        index = i;
                     }
                 }
+                if (found == 1) {
+                    $scope.checkedItems.splice(index, 1);
+                }
+                else {
+                    $scope.checkedItems.push(item);
+                }
             };
+
+            //checkbox toggler
+            $scope.checkedCrates = [];
+            $scope.toggleCrate = (crate) => {
+                var found = 0
+                var index = 0
+                for (var i = 0; i < $scope.checkedCrates.length; i++) {
+                    if ($scope.checkedCrates[i] == crate) {
+                        found = 1;
+                        index = i;
+                    }
+                }
+                if (found == 1) {
+                    $scope.checkedCrates.splice(index, 1);
+                }
+                else {
+                    $scope.checkedCrates.push(crate);
+                }
+            };
+
+
+            //checkbox toggler
+            $scope.checkedProjects = [];
+            $scope.toggleProject = (project) => {
+                var found = 0
+                var index = 0
+                for (var i = 0; i < $scope.checkedProjects.length; i++) {
+                    if ($scope.checkedProjects[i] == project) {
+                        found = 1;
+                        index = i;
+                    }
+                }
+                if (found == 1) {
+                    $scope.checkedProjects.splice(index, 1);
+                }
+                else {
+                    $scope.checkedProjects.push(project);
+                }
+            };
+
+
+            
+           
             $scope.compileModalItems = (itemList) => {
                 $scope.modalItems = itemList;
             };
