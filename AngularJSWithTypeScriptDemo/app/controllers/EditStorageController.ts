@@ -15,7 +15,7 @@ module ossApp.controllers {
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
             public $scope
-        //$localStorage
+            //$localStorage
             ) {
 
             //this is your local storage
@@ -44,7 +44,7 @@ module ossApp.controllers {
             ]//1 for status is available -1 for not available
             $scope.allProjects = [
                 { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] }
-                ]
+            ];
 
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FUNCTIONS FOR POPULATION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
