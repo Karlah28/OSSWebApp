@@ -40,10 +40,12 @@ module ossApp.controllers {
                 { ItemName: "this2", ItemQuantity: 20, EPCData: "al;sjoiwer" }
             ];
             $scope.allCrates = [
-                { CrateID: 1, CrateStatus: 1, ItemList: [{ Label: "something", Quantity: 4 }, { Label: "something2", Quantity: 10 }, { Label: "something3", Quantity: 99 }] }
+                { CrateID: 1, CrateStatus: 1, ItemList: [{ Label: "something", Quantity: 4 }, { Label: "something2", Quantity: 10 }, { Label: "something3", Quantity: 99 }] },
+                { CrateID: 2, CrateStatus: 2, ItemList: [{ Label: "something2", Quantity: 2 }, { Label: "something3", Quantity: 3 }, { Label: "something4", Quantity: 4 }] }
             ]//1 for status is available -1 for not available
             $scope.allProjects = [
-                { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] }
+                { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] },
+                { ProjectName: "myname2", Description: "some stuff about the project that might be too long 2", ItemList: ["this2", "that2", "the other thing2"], QuantityNeeded: [2, 3, 4] }
             ];
 
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FUNCTIONS FOR POPULATION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -143,6 +145,18 @@ module ossApp.controllers {
             };
 
 
+            $scope.crateItems = " ";
+            $scope.printItems = (itemList) => {
+                $scope.crateItems = "";
+                for (var i = 0; i < itemList.length; i++) {
+                    if (i == itemList.length - 1) {
+                        $scope.crateItems = $scope.crateItems + itemList[i].Label;
+                    }
+                    else {
+                        $scope.crateItems = $scope.crateItems + itemList[i].Label + ", ";
+                    }
+                }
+            };
             
            
             $scope.compileModalItems = (itemList) => {
