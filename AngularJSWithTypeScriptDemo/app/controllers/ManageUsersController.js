@@ -52,11 +52,20 @@ var ossApp;
                 //send approved users
                 $scope.approve = function () {
                     //clear temp array
-                    var x = $scope.TempProspects;
-                    var methodUrl = "/Account/ViewUnregisteredUsers";
-                    HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects, function (results) {
-                        var x = results;
-                    });
+                    var x = $scope.tempIndex;
+                    var methodUrl = "/Account/ApproveUser";
+                    for (var i = 0; i < $scope.tempIndex.length; i++) {
+                        var index = $scope.tempIndex[i];
+                        var email = prospects[index].Email;
+                        console.log(email);
+                        HttpService.serverPost(baseUrl + methodUrl, email, function (results, status) {
+                            var x = results;
+                            console.log('status->', status);
+                        });
+                    }
+                    //HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {
+                    //    var x = results;
+                    //});
                 };
                 //send denied users
                 $scope.deny = function () {

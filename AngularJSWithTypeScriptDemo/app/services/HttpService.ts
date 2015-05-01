@@ -1,4 +1,5 @@
 ﻿/// <reference path="../interfaces/interfaces.ts" />
+
 module ossApp.Services {
 
 
@@ -26,9 +27,10 @@ module ossApp.Services {
 
         public serverPost(url: string, data: any, callback: (data: any, status: any) => void): void {
             var self = this;
-            self.httpService.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-            self.httpService.post(url, data).
-                success((data: any, status: any, headers: any, config: any) => {
+
+            self.httpService.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+            self.httpService.post(url, JSON.stringify(data))
+                .success((data: any, status: any, headers: any, config: any) => {
                 if (status === 200) {
                     callback(data, status);
                 } else {
