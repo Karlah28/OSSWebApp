@@ -18,11 +18,49 @@
         //Login                                                
             ) {
 
+            $scope.allItems = [];
+            $scope.allCrates = [];
+            $scope.allProjects = [];
             $scope.title = "Outreach Inventory";
 
             $scope.sendRequest = () => {
                 window.alert("Request Successfully Sent");
             };
+            //OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            $scope.serverUrl = "http://localhost:51941/api";
+
+
+            $scope.getItems = () => {
+                //this is the Route specified in the server's controllers 
+                var urlController = "/Inventory/ViewItems";
+                $scope.allItems = [];
+                HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    for (var i = 0; i < response.length; i++) {
+                        $scope.allItems.push(response[i]);
+                    }
+                });
+            };
+            $scope.getCrates = () => {
+                var urlController = "/Inventory/ViewCrates";
+                HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    $scope.allCrates = [];
+                    for (var i = 0; i < response.length; i++) {
+                        $scope.allCrates.push(response[i]);
+                    }
+                });
+            };
+            $scope.getProjects = () => {
+                //this is the Route specified in the server's controllers 
+                var urlController = "/Inventory/ViewProjects";
+                HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    $scope.allProjects = [];
+                    for (var i = 0; i < response.length; i++) {
+                        $scope.allProjects.push(response[i]);
+                    }
+                    console.log($scope.allProjects);
+                });
+            };
+
 
 
             //TOGGLE FUNCTIONS============================================

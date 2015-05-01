@@ -6,9 +6,44 @@ var ossApp;
             function ViewInventoryController(NavbarService, HttpService, 
                 //LoginService: ossApp.Services.LoginService,
                 $scope, $location) {
+                $scope.allItems = [];
+                $scope.allCrates = [];
+                $scope.allProjects = [];
                 $scope.title = "Outreach Inventory";
                 $scope.sendRequest = function () {
                     window.alert("Request Successfully Sent");
+                };
+                //OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                $scope.serverUrl = "http://localhost:51941/api";
+                $scope.getItems = function () {
+                    //this is the Route specified in the server's controllers 
+                    var urlController = "/Inventory/ViewItems";
+                    $scope.allItems = [];
+                    HttpService.serverGet($scope.serverUrl + urlController, function (response) {
+                        for (var i = 0; i < response.length; i++) {
+                            $scope.allItems.push(response[i]);
+                        }
+                    });
+                };
+                $scope.getCrates = function () {
+                    var urlController = "/Inventory/ViewCrates";
+                    HttpService.serverGet($scope.serverUrl + urlController, function (response) {
+                        $scope.allCrates = [];
+                        for (var i = 0; i < response.length; i++) {
+                            $scope.allCrates.push(response[i]);
+                        }
+                    });
+                };
+                $scope.getProjects = function () {
+                    //this is the Route specified in the server's controllers 
+                    var urlController = "/Inventory/ViewProjects";
+                    HttpService.serverGet($scope.serverUrl + urlController, function (response) {
+                        $scope.allProjects = [];
+                        for (var i = 0; i < response.length; i++) {
+                            $scope.allProjects.push(response[i]);
+                        }
+                        console.log($scope.allProjects);
+                    });
                 };
                 //TOGGLE FUNCTIONS============================================
                 $scope.checkedItems = [];

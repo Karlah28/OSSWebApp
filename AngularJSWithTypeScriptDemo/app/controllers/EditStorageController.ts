@@ -54,7 +54,19 @@ module ossApp.controllers {
                 { EPCData: "i3141234lkjkl" }
             ];
 
-            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FUNCTIONS FOR POPULATION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            $scope.addItems = (item) => {
+                console.log("bs")
+                //this is the Route specified in the server's controllers 
+                console.log($scope.myItem);
+                var urlController = "/InventoryController/AddItem";
+                HttpService.serverPost($scope.serverUrl + urlController, item, (response) => {
+                    var x = response;
+                });
+            };
+
+  
+
 
             $scope.getItems = () => {
                 console.log("bs")
@@ -84,8 +96,6 @@ module ossApp.controllers {
                     }
                 });
             };
-
-
 
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>VARIOUS FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             

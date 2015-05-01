@@ -115,7 +115,7 @@
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
                     <tr class="animate-repeat" ng-repeat="project in allProjects | orderBy:predicate:reverse">
                         <td>
-                            <input type="checkbox" name="identifier" ng-value="item" ng-click="toggleProject(project)" />
+                            <input type="checkbox" name="identifier" ng-click="toggleProject(project)" />
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
                         </td>
                         <td>
@@ -476,31 +476,31 @@
                             <td>
                                 <div class="form-group">
                                     <label for="ItemName">Item Name</label>
-                                    <input type="text" class="form-control" id="ItemName">
+                                    <input ng-model="ItemName" type="text" class="form-control" id="ItemName">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
                                     <label for="CrateID">Crate ID</label>
-                                    <input type="text" class="form-control" id="CrateID">
+                                    <input ng-model="CrateID" type="text" class="form-control" id="CrateID">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
                                     <label for="ItemProject">Item Project</label>
-                                    <input type="text" class="form-control" id="ItemProject">
+                                    <input ng-model="ItemProject" type="text" class="form-control" id="ItemProject">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
                                     <label for="ItemQuantity">Item Quantity</label>
-                                    <input type="text" class="form-control" id="ItemQuantity">
+                                    <input ng-model="ItemQuantity" type="text" class="form-control" id="ItemQuantity">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
                                     <label for="ItemStatus">Item Status</label>
-                                    <input type="text" class="form-control" id="ItemStatus">
+                                    <input ng-model="ItemStatus" type="text" class="form-control" id="ItemStatus">
                                 </div>
                             </td>
                         </tr>
@@ -508,7 +508,7 @@
                 </div>
                 <div class="modal-footer">
                     <!-- NEED TO ADD FUNCTIONALITY TO THIS BUTTON-->
-                    <button type="button" class="btn btn-default">Submit</button>
+                    <button type="button" class="btn btn-default" ng-click="addItems(myItem)">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -602,13 +602,13 @@
                             <td>
                                 <div class="form-group">
                                     <label for="ProjectName">Project Name</label>
-                                    <input type="text" class="form-control" id="ProjectName">
+                                    <input ng-model="ProjectName" type="text" class="form-control" id="ProjectName">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
                                     <label for="Description">Description</label>
-                                    <input type="text" class="form-control" id="Description">
+                                    <input ng-model="Description" type="text" class="form-control" id="Description">
                                 </div>
                             </td>
                             <td>
@@ -621,6 +621,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="addProject(myItem)">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
