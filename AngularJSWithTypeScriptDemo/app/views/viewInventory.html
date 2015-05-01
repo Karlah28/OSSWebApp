@@ -1,7 +1,7 @@
 ﻿<div class="bodyContainer">
     <div>
         <center>
-            <h1 class="ossTitle">Storage Administrator</h1>
+            <h1 class="ossTitle">OSS Inventory</h1>
         </center>
     </div>
 
@@ -34,19 +34,30 @@
                 <div class="panel-heading">Items</div>
                 <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
-                    <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
-                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse">Quantity</a></th>
-                    <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
+                    <th><a href="" ng-click="predicate ='ItemName'; modalReverse=!modalReverse">Item Name</a></th>
+                    <th><a href="" ng-click="predicate ='CrateID'; modalReverse=!modalReverse">Crate ID</a></th>
+                    <th><a href="" ng-click="predicate ='ItemProject'; modalReverse=!modalReverse">Item Project</a></th>
+                    <th><a href="" ng-click="predicate ='ItemQuantity'; modalReverse=!modalReverse">Item Quantity</a></th>
+                    <th><a href="" ng-click="predicate ='ItemStatus'; modalReverse=!modalReverse">Item Status</a></th>
                     <tr class="animate-repeat" ng-repeat="item in allItems | orderBy:predicate:reverse">
                         <td>
-                            <input type="checkbox" name="identifier" ng-value="item" ng-click="addItem(item)" />
+                            <input type="checkbox" name="identifier" ng-value="item" ng-click="toggleItem(item)" />
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
                         </td>
                         <td>
                             {{item.ItemName}}
                         </td>
                         <td>
+                            {{item.CrateID}}
+                        </td>
+                        <td>
+                            {{item.ItemProject}}
+                        </td>
+                        <td>
                             {{item.ItemQuantity}}
+                        </td>
+                        <td>
+                            {{item.ItemStatus}}
                         </td>
                     </tr>
                 </table>
@@ -58,19 +69,37 @@
             <div class="panel panel-default">
                 <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
-                    <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
-                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse">Quantity</a></th>
+                    <th><a href="" ng-click="predicate ='CrateID'; modalReverse=!modalReverse">CrateID</a></th>
+                    <th><a href="" ng-click="predicate ='CrateLocation'; modalReverse=!modalReverse">CrateLocation</a></th>
+                    <th><a href="" ng-click="predicate ='CrateCategory'; modalReverse=!modalReverse">CrateCategory</a></th>
+                    <th><a href="" ng-click="predicate ='CrateProject'; modalReverse=!modalReverse">CrateProject</a></th>
+                    <th><a href="" ng-click="predicate ='CrateStatus'; modalReverse=!modalReverse">CrateStatus</a></th>
+                    <th><a href="">Item List (click for old list)</a></th>
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
-                    <tr class="animate-repeat" ng-repeat="item in allCrates | orderBy:predicate:reverse">
+                    <tr class="animate-repeat" ng-repeat="crate in allCrates | orderBy:predicate:reverse">
                         <td>
                             <input type="checkbox" name="identifier" ng-value="item" ng-click="addItem(item)" />
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
                         </td>
                         <td>
-                            {{item.ItemName}}
+                            {{crate.CrateID}}
                         </td>
                         <td>
-                            {{item.ItemQuantity}}
+                            {{crate.CrateLocation}}
+                        </td>
+                        <td>
+                            {{crate.CrateCategory}}
+                        </td>
+                        <td>
+                            {{crate.CrateProject}}
+                        </td>
+                        <td>
+                            {{crate.CrateStatus}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListModal" ng-click="compileModalItems(crate.ItemList); modalReverse='true'">
+                                Item List
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -82,19 +111,26 @@
             <div class="panel panel-default">
                 <table class="table" ng-init="reverse=true">
                     <th data-checkbox="true"></th>
-                    <th><a href="" ng-click="predicate ='ItemName'; reverse=!reverse">Label</a></th>
-                    <th><a href="" ng-click="predicate='ItemQuantity'; reverse=!reverse">Quantity</a></th>
+                    <th><a href="" ng-click="predicate ='ProjectName'; modalReverse=!modalReverse">Project Name</a></th>
+                    <th><a href="" ng-click="predicate ='Description'; modalReverse=!modalReverse">Description</a></th>
+                    <th><a href="">Item List</a></th>
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
-                    <tr class="animate-repeat" ng-repeat="item in allProjects | orderBy:predicate:reverse">
+                    <tr class="animate-repeat" ng-repeat="project in allProjects | orderBy:predicate:reverse">
                         <td>
                             <input type="checkbox" name="identifier" ng-value="item" ng-click="addItem(item)" />
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
                         </td>
                         <td>
-                            {{item.ItemName}}
+                            {{project.ProjectName}}
                         </td>
                         <td>
-                            {{item.ItemQuantity}}
+                            {{project.Description}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListModal" ng-click="compileModalItems(project.ItemList, project.QuantityNeeded)">
+                                <!-- display a different modal to compile items-->
+                                Item List
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -103,3 +139,30 @@
         <br />
         <br />
     </div>
+
+    <!-- modal for crate item list display-->
+    <div class="fade modal" id="crateListModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4 class="modal-title">Item List</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <th><a href="" ng-click="predicate ='Item Name'; modalReverse=!modalReverse">Label</a></th>
+                        <th><a href="" ng-click="predicate ='Quantity'; modalReverse=!modalReverse">Quantity</a></th>
+                        <tr ng-repeat="modalItem in modalItems | orderBy:predicate:modalReverse">
+                            <td>{{modalItem.ItemName}}</td>
+                            <td>{{modalItem.Quantity}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>

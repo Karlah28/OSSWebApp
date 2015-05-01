@@ -110,7 +110,7 @@
                 <table class="table">
                     <th data-checkbox="true"></th>
                     <th><a href="" ng-click="predicate ='ProjectName'; reverse=!reverse">Label</a></th>
-                    <th><a href="" ng-click="predicate='Description'; reverse=!reverse">Quantity</a></th>
+                    <th><a href="" ng-click="predicate='Description'; reverse=!reverse">Description</a></th>
                     <th><a href=""></a>Item List</th>
                     <!-- gotta change the ng-repeat and the columns to appropriately represent the data being pulled-->
                     <tr class="animate-repeat" ng-repeat="project in allProjects | orderBy:predicate:reverse">
@@ -397,7 +397,7 @@
                     <!-- -->
                     <table class="table">
                         <th></th>
-                        <th><a href="" ng-click="predicate ='ItemName'; modalReverse=!modalReverse">ProjectName</a></th>
+                        <th><a href="" ng-click="predicate ='ItemName'; modalReverse=!modalReverse">Item Name</a></th>
                         <th><a href="">Quantity Needed (0 is default)</a></th>
                         <tr ng-repeat="myItem in allItems  | orderBy:predicate:modalReverse">
                             <td>
