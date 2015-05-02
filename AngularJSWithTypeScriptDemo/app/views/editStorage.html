@@ -1,4 +1,10 @@
-﻿<div class="bodyContainer">
+﻿<!-- TODO LIST.....
+    
+    MAKE IT SO ALL OF THE FORMS AND STUFF WORK INTEGRALLY WITH THEIR MODALS
+    
+    -->
+
+<div class="bodyContainer">
     <div>
         <center>
             <h1 class="ossTitle">{{title}}</h1>
@@ -12,20 +18,32 @@
     <div ng-if="items" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editItemModal">Edit</button>
         <button type="button" class="btn btn-default">Delete</button>
+        <br />
+        <br />
+        <h5>Note: once you choose to edit an item, the old item information will be deleted</h5>
     </div>
     <div ng-if="crates" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editCrateModal">Edit</button>
         <button type="button" class="btn btn-default">Delete</button>
+        <br />
+        <br />
+        <h5>Note: once you choose to edit an item, the old item information will be deleted</h5>
     </div>
     <div ng-if="projects" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editProjectModal">Edit</button>
         <button type="button" class="btn btn-default">Delete</button>
+        <br />
+        <br />
+        <h5>Note: once you choose to edit an item, the old item information will be deleted</h5>
     </div>
     <div ng-if="new" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addItemModal">Add as Item</button>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addCrateModal">Add as Crate</button>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addProjectModal">Add a Project</button>
         <button type="button" class="btn btn-default">Delete</button>
+        <br />
+        <br />
+        <h5>Note: you must refresh the page if you cancel your changes</h5>
     </div>
 
 
@@ -96,6 +114,9 @@
                             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListModal" ng-click="compileModalItems(crate.ItemList); modalReverse='true'">
                                 Item List
                             </button>
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListBuilderModal" ng-click="modalReverse='true'">
+                                Edit Item List
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -127,6 +148,9 @@
                         <td>
                             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListModal" ng-click="compileProjectModalItems(project); modalReverse='true'">
                                 Item List
+                            </button>
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListBuilderModal" ng-click="modalReverse='true'">
+                                Edit Item List
                             </button>
                         </td>
                     </tr>
@@ -233,39 +257,41 @@
                                 {{item.EPCData}}
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemName">ItemName : {{item.ItemName}}</label>
-                                    <input type="text" class="form-control" id="ItemName">
-                                </div>
+                                <ng-form>
+                                    <label>Item Name : {{item.ItemName}}</label>
+                                    <input type="text" class="form-control" ng-model="item.ItemName">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateID">CrateID : {{item.CrateID}}</label>
-                                    <input type="text" class="form-control" id="CrateID">
-                                </div>
+                                <ng-form>
+                                    <label>Crate ID : {{item.CrateID}}</label>
+                                    <input type="text" class="form-control" ng-model="item.CrateID">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemProject">ItemProject : {{item.ItemProject}}</label>
-                                    <input type="text" class="form-control" id="ItemProject">
-                                </div>
+                                <ng-form>
+                                    <label>ItemProject : {{item.ItemProject}}</label>
+                                    <input type="text" class="form-control" ng-model="item.ItemProject">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemQuantity">ItemQuantity : {{item.ItemQuantity}}</label> 
-                                    <input type="text" class="form-control" id="ItemQuantity">
-                                </div>
+                                <ng-form>
+                                    <label>ItemQuantity : {{item.ItemQuantity}}</label>
+                                    <input type="text" class="form-control" ng-model="item.ItemQuantity">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemStatus">Item Status: {{item.ItemStatus}}</label>
-                                    <input type="text" class="form-control" id="ItemStatus">
-                                </div>
+                                <ng-form>
+                                    <label>Item Status : {{item.ItemStatus}} (1 for in 0 for out)</label>
+                                    <input type="text" class="form-control" ng-model="item.ItemStatus">
+                                </ng-form>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
+                    {{checkedItems}}
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editItems(checkedItems)">Submit Changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -289,47 +315,39 @@
                         <th><a href="" ng-click="predicate ='CrateCategory'; modalReverse=!modalReverse">CrateCategory</a></th>
                         <th><a href="" ng-click="predicate ='CrateProject'; modalReverse=!modalReverse">CrateProject</a></th>
                         <th><a href="" ng-click="predicate ='CrateStatus'; modalReverse=!modalReverse">CrateStatus</a></th>
-                        <th><a href="">Item List (click for old list)</a></th>
                         <tr ng-repeat="crate in checkedCrates | orderBy:predicate:modalReverse">
                             <td>
                                 {{crate.EPCData}}
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateID">Crate ID : {{crate.CrateID}}</label>
-                                    <input type="text" class="form-control" id="CrateID">
-                                </div>
+                                <ng-form>
+                                    <label>Crate ID : {{crate.CrateID}}</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateID">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateLocation">Crate Location: {{crate.CrateLocation}}</label> 
-                                    <input type="text" class="form-control" id="CrateLocation">
-                                </div>
+                                <ng-form>
+                                    <label>Crate Location : {{crate.CrateLocation}}</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateLocation">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateCategory">Crate Category : {{crate.CrateCategory}}</label> 
-                                    <input type="text" class="form-control" id="CrateCategory">
-                                </div>
+                                <ng-form>
+                                    <label>Crate Category : {{crate.CrateCategory}}</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateCategory">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateProject">Crate Project : {{crate.CrateProject}}</label> 
-                                    <input type="text" class="form-control" id="CrateProject">
-                                </div>
+                                <ng-form>
+                                    <label>Crate Project : {{crate.CrateProject}}</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateProject">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateStatus">Crate Status : {{crate.CrateStatus}}</label>
-                                    <input type="text" class="form-control" id="CrateStatus">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <label for="CrateStatus"><a href="" ng-click="printItems(crate.ItemList)">Item List</a> : {{crateItems}}
-                                    </label>
-                                    <input type="text" class="form-control" id="CrateStatus">
-                                </div>
+                                <ng-form>
+                                    <label>Crate Status : {{crate.CrateStatus}} (1 for in 0 for out)</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateStatus">
+                                </ng-form>
                             </td>
                         </tr>
                     </table>
@@ -351,29 +369,21 @@
                     <h4 class="modal-title">Editing Projects</h4>
                 </div>
                 <div class="modal-body">
-                    <!-- -->
                     <table class="table">
                         <th><a href="" ng-click="predicate ='ProjectName'; modalReverse=!modalReverse">ProjectName</a></th>
                         <th><a href="" ng-click="predicate ='Description'; modalReverse=!modalReverse">Description</a></th>
-                        <th><a href="">Item List</a></th>
                         <tr ng-repeat="project in checkedProjects | orderBy:predicate:modalReverse">
                             <td>
-                                <div class="form-group">
-                                    <label for="ProjectName">Project Name : {{project.ProjectName}}</label>
-                                    <input type="text" class="form-control" id="ProjectName">
-                                </div>
+                                <ng-form>
+                                    <label>Project Name : {{project.ProjectName}}</label>
+                                    <input type="text" class="form-control" ng-model="project.ProjectName">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="Description">Description : {{project.Description}}</label>
-                                    <input type="text" class="form-control" id="Description">
-                                </div>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListBuilderModal">
-                                    <!-- display a different modal to compile items-->
-                                    Item List Builder
-                                </button>
+                                <ng-form>
+                                    <label>Description : {{project.Description}}</label>
+                                    <input type="text" class="form-control" ng-model="project.Description">
+                                </ng-form>
                             </td>
                         </tr>
                     </table>
@@ -407,15 +417,16 @@
                                 {{myItem.ItemName}}
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="QuantityNeeded">Quantity Needed</label>
-                                    <input type="text" class="form-control" id="QuantityNeeded">
-                                </div>
+                                <ng-form>
+                                    <label>Quantity Needed</label>
+                                    <input type="text" class="form-control" ng-model="project.QuantityNeeded">
+                                </ng-form>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editProjectItems; clearBuilder()">Close</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder()">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -446,6 +457,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editCrateItems(); clearBuilder()">Submit Changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder()">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -474,40 +486,41 @@
                                 {{item.EPCData}}
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemName">Item Name</label>
-                                    <input ng-model="ItemName" type="text" class="form-control" id="ItemName">
-                                </div>
+                                <ng-form>
+                                    <label>Item Name</label>
+                                    <input type="text" class=control" ng-model="item.ItemName">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateID">Crate ID</label>
-                                    <input ng-model="CrateID" type="text" class="form-control" id="CrateID">
-                                </div>
+                                <ng-form>
+                                    <label>Crate ID</label>
+                                    <input type="text" class="form-control" ng-model="item.CrateID">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemProject">Item Project</label>
-                                    <input ng-model="ItemProject" type="text" class="form-control" id="ItemProject">
-                                </div>
+                                <ng-form>
+                                    <label>Item Project</label>
+                                    <input type="text" class="form-control" ng-model="item.ItemProject">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemQuantity">Item Quantity</label>
-                                    <input ng-model="ItemQuantity" type="text" class="form-control" id="ItemQuantity">
-                                </div>
+                                <ng-form>
+                                    <label>Item Quantity</label>
+                                    <input type="text" class="form-control" ng-model="item.ItemQuantity">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="ItemStatus">Item Status</label>
-                                    <input ng-model="ItemStatus" type="text" class="form-control" id="ItemStatus">
-                                </div>
+                                <ng-form>
+                                    <label>Item Status</label>
+                                    <input type="text" class="form-control" ng-model="item.ItemStatus">
+                                </ng-form>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <!-- NEED TO ADD FUNCTIONALITY TO THIS BUTTON-->
+                    {{checkedNewItems}}
                     <button type="button" class="btn btn-default" ng-click="addItems(myItem)">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -523,6 +536,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">x</button>
                     <h4 class="modal-title">Adding Crates</h4>
+                    <h5>Note: Items can be added to the crate in the crate editing section once it is made</h5>
                 </div>
                 <div class="modal-body">
                     <!-- -->
@@ -533,46 +547,39 @@
                         <th><a href="" ng-click="predicate ='CrateCategory'; modalReverse=!modalReverse">CrateCategory</a></th>
                         <th><a href="" ng-click="predicate ='CrateProject'; modalReverse=!modalReverse">CrateProject</a></th>
                         <th><a href="" ng-click="predicate ='CrateStatus'; modalReverse=!modalReverse">CrateStatus</a></th>
-                        <th><a href="">Item List</a></th>
                         <tr ng-repeat="crate in checkedNewItems | orderBy:predicate:modalReverse">
                             <td>
                                 {{crate.EPCData}}
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateID">Crate ID</label>
-                                    <input type="text" class="form-control" id="CrateID">
-                                </div>
+                                <ng-form>
+                                    <label>Crate ID</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateID">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateLocation">Crate Location</label>
-                                    <input type="text" class="form-control" id="CrateLocation">
-                                </div>
+                                <ng-form>
+                                    <label>Crate Location</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateLocation">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateCategory">Crate Category</label>
-                                    <input type="text" class="form-control" id="CrateCategory">
-                                </div>
+                                <ng-form>
+                                    <label>Crate Category</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateCategory">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateProject">Crate Project</label>
-                                    <input type="text" class="form-control" id="CrateProject">
-                                </div>
+                                <ng-form>
+                                    <label>CrateProject</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateProject">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="CrateStatus">Crate Status</label>
-                                    <input type="text" class="form-control" id="CrateStatus">
-                                </div>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListBuilderModal">
-                                    <!-- display a different modal to compile items-->
-                                    Item List Builder
-                                </button>
+                                <ng-form>
+                                    <label>Crate Status</label>
+                                    <input type="text" class="form-control" ng-model="crate.CrateStatus">
+                                </ng-form>
                             </td>
                         </tr>
                     </table>
@@ -597,25 +604,38 @@
                     <table class="table">
                         <th><a href="" ng-click="predicate ='ProjectName'; modalReverse=!modalReverse">ProjectName</a></th>
                         <th><a href="" ng-click="predicate ='Description'; modalReverse=!modalReverse">Description</a></th>
-                        <th><a href="">Item List</a></th>
                         <tr>
                             <td>
-                                <div class="form-group">
-                                    <label for="ProjectName">Project Name</label>
-                                    <input ng-model="ProjectName" type="text" class="form-control" id="ProjectName">
-                                </div>
+                                <ng-form>
+                                    <label>ProjectName</label>
+                                    <input type="text" class="form-control" ng-model="project.ProjectName">
+                                </ng-form>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <label for="Description">Description</label>
-                                    <input ng-model="Description" type="text" class="form-control" id="Description">
-                                </div>
+                                <ng-form>
+                                    <label>Description</label>
+                                    <input type="text" class="form-control" ng-model="project.Description">
+                                </ng-form>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>Items to Add</h4>
+                    <table class="table">
+                        <th></th>
+                        <th><a href="" ng-click="predicate ='ItemName'; modalReverse=!modalReverse">Item Name</a></th>
+                        <th><a href="">Quantity Needed (0 is default)</a></th>
+                        <tr ng-repeat="myItem in allItems  | orderBy:predicate:modalReverse">
+                            <td>
+                                <input type="checkbox" name="identifier" ng-value="myItem" ng-click="toggleBuilder(myItem)" />
                             </td>
                             <td>
-                                <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListBuilderModal">
-                                    <!-- display a different modal to compile items-->
-                                    Item List Builder
-                                </button>
+                                {{myItem.ItemName}}
+                            </td>
+                            <td>
+                                <ng-form>
+                                    <label>Quantity Needed</label>
+                                    <input type="text" class="form-group" ng-model="project.QuantityNeeded">
+                                </ng-form>
                             </td>
                         </tr>
                     </table>

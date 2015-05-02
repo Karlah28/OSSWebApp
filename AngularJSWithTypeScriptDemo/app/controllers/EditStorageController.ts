@@ -64,6 +64,15 @@ module ossApp.controllers {
                     var x = response;
                 });
             };
+            $scope.editItems = (item) => {
+                console.log("bs")
+                //this is the Route specified in the server's controllers 
+                console.log($scope.myItem);
+                var urlController = "/InventoryController/AddItem";
+                HttpService.serverPost($scope.serverUrl + urlController, item,(response) => {
+                    var x = response;
+                });
+            };
 
   
 
@@ -92,7 +101,7 @@ module ossApp.controllers {
                 var urlController = "/InventoryController/ViewProjects";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
                     for (var i = 0; i < response.length; i++) {
-                        $scope.allItems.push(response[i]);
+                        $scope.allProjects.push(response[i]);
                     }
                 });
             };
@@ -101,6 +110,9 @@ module ossApp.controllers {
             
             //use splice for this function... also make it toggle
             //this function is used to toggle items being added to an array when their checkbox is checked
+            $scope.forceReload = (item) => {
+                location.reload(true);
+            };
 
 
             $scope.checkedItems = [];
@@ -180,7 +192,7 @@ module ossApp.controllers {
             };
 
 
-            //used for checkboxes in modals
+            //used for checkboxes in modals.. checked stuff in modals will be stored in checkedBuilder
             $scope.checkedBuilder = [];
             $scope.toggleBuilder = (item) => {
                 var found = 0

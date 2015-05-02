@@ -47,6 +47,15 @@ var ossApp;
                         var x = response;
                     });
                 };
+                $scope.editItems = function (item) {
+                    console.log("bs");
+                    //this is the Route specified in the server's controllers 
+                    console.log($scope.myItem);
+                    var urlController = "/InventoryController/AddItem";
+                    HttpService.serverPost($scope.serverUrl + urlController, item, function (response) {
+                        var x = response;
+                    });
+                };
                 $scope.getItems = function () {
                     console.log("bs");
                     //this is the Route specified in the server's controllers 
@@ -71,13 +80,16 @@ var ossApp;
                     var urlController = "/InventoryController/ViewProjects";
                     HttpService.serverGet($scope.serverUrl + urlController, function (response) {
                         for (var i = 0; i < response.length; i++) {
-                            $scope.allItems.push(response[i]);
+                            $scope.allProjects.push(response[i]);
                         }
                     });
                 };
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>VARIOUS FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 //use splice for this function... also make it toggle
                 //this function is used to toggle items being added to an array when their checkbox is checked
+                $scope.forceReload = function (item) {
+                    location.reload(true);
+                };
                 $scope.checkedItems = [];
                 $scope.toggleItem = function (item) {
                     var found = 0;
@@ -149,7 +161,7 @@ var ossApp;
                         $scope.checkedNewItems.push(item);
                     }
                 };
-                //used for checkboxes in modals
+                //used for checkboxes in modals.. checked stuff in modals will be stored in checkedBuilder
                 $scope.checkedBuilder = [];
                 $scope.toggleBuilder = function (item) {
                     var found = 0;
