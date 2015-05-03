@@ -21,17 +21,17 @@ module ossApp.controllers {
             var baseUrl = "http://localhost:51941/api";
             $scope.title = "Manage Inventory Forms";
 
-            $scope.forms = new Array<userForm>();
+            $scope.forms = new Array<UserForm>();
             $scope.tempIndex = new Array();
-            
+            $scope.isItemEmpty = false;
+            $scope.isCrateEmpty = false;
+
             //make call on page load
             angular.element(document).ready(function () {
                 var getUsersUrl = "/Inventory/ViewRequestInvForms";
                 //var getUsersUrl = "/Inventory/ViewItems";
                 HttpService.serverGet(baseUrl + getUsersUrl,(results) => {
                     $scope.forms = results;
-                    //$localStorage.potentialUsers = results;
-                    $scope.setProspects();
                 });
             });
 
@@ -69,16 +69,30 @@ module ossApp.controllers {
             };
 
             $scope.openCrateModal = (index) => {
-                $scope.modalData = null;
-                $scope.modalData = $scope.forms[index].RequestedCrates;
+                $scope.crateModalData = [];
+                $scope.crateModalData = $scope.forms[index].RequestedCrates;
+                if ($scope.crateModalData.length === 0) {
+                    $scope.isCrateEmpty = true;
+                }
+                else {
+                    $scope.isCrateEmpty = false;
+                }
             };
 
-
+            $scope.openItemModal = (index) => {
+                $scope.itemModalData =[];
+                $scope.itemModalData = $scope.forms[index].RequestedItems;
+                if ($scope.itemModalData.length === 0) {
+                    $scope.isItemEmpty = true;
+                }
+                else {
+                    $scope.isItemEmpty = false;
+                }
+            };
         }
-
     }
 
-    class userForm {
+    class UserForm {
         RegisteredUser: string;
         Requester: string;
         Organization: string;

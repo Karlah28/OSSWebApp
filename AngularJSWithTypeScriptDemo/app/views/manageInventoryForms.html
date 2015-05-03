@@ -48,12 +48,12 @@
                     {{form.Reason}}
                 </td>
                 <td>
-                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="" ng-click="openCrateModal($index)">
+                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListModal" ng-click="openCrateModal($index)">
                         View Crates List
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="" ng-click="modalReverse='true'">
+                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ItemListModal" ng-click="openItemModal($index)">
                         View Items List
                     </button>
                 </td>
@@ -62,8 +62,35 @@
     </div>
 </div>
 
- <!-- modal for crate item list display-->
+<!-- modal for crate item list display-->
 <div class="fade modal" id="crateListModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h4 class="modal-title">Crate List</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" ng-show="!isCrateEmpty">
+                    <th><a href="" crate ng-click="predicate ='Item Name'; modalReverse=!modalReverse">Crate ID</a></th>
+                    <th><a href="" ng-click="predicate ='Quantity'; modalReverse=!modalReverse">Location</a></th>
+                    <tr ng-repeat="crate in crateModalData | orderBy:predicate:modalReverse">
+                        <td>{{crate.CrateID}}</td>
+                        <td>{{crate.CrateLocation}}</td>
+                    </tr>
+                </table>
+                <center ng-show="isCrateEmpty">
+                    <h2>No Crates Requested</h2>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="fade modal" id="ItemListModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -71,14 +98,20 @@
                 <h4 class="modal-title">Item List</h4>
             </div>
             <div class="modal-body">
-                <table class="table">
-                    <th><a href="" ng-click="predicate ='Item Name'; modalReverse=!modalReverse">Label</a></th>
+                <table class="table" ng-show="!isItemEmpty">
+                    <th><a href="" ng-click="predicate ='Item Name'; modalReverse=!modalReverse">Item</a></th>
                     <th><a href="" ng-click="predicate ='Quantity'; modalReverse=!modalReverse">Quantity</a></th>
-                    <tr ng-repeat="modalItem in modalItems | orderBy:predicate:modalReverse">
-                        <td>{{modalItem.ItemName}}</td>
-                        <td>{{modalItem.Quantity}}</td>
+                    <th><a href="" ng-click="predicate ='Quantity'; modalReverse=!modalReverse">Location</a></th>
+                    <tr ng-repeat="item in itemModalData | orderBy:predicate:modalReverse">
+                        <td>{{item.ItemName}}</td>
+                        <td>{{item.ItemQuantity}}</td>
+                        <td>{{item.ItemLocation}}</td>
                     </tr>
                 </table>
+                <center ng-show="isItemEmpty">
+                    <h2>No Items Requested</h2>
+                </center>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
