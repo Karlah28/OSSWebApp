@@ -5,7 +5,7 @@ var ossApp;
     var controllers;
     (function (controllers) {
         var ManageUsersController = (function () {
-            function ManageUsersController(NavbarService, HttpService, $scope, $localStorage) {
+            function ManageUsersController(NavbarService, HttpService, $scope, $localStorage, $location) {
                 this.$scope = $scope;
                 var baseUrl = "http://localhost:51941/api";
                 //make call on page load
@@ -61,6 +61,8 @@ var ossApp;
                         HttpService.serverPost(baseUrl + methodUrl, email, function (results, status) {
                             var x = results;
                             console.log('status->', status);
+                            window.alert('Processed successgfully');
+                            $location.path('/userAdministration');
                         });
                     }
                     //HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {
@@ -81,7 +83,8 @@ var ossApp;
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
                 '$scope',
-                '$localStorage'
+                '$localStorage',
+                '$location'
             ];
             return ManageUsersController;
         })();

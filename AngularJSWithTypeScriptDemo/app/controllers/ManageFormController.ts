@@ -9,13 +9,15 @@ module ossApp.controllers {
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
             '$scope',
-            '$localStorage'
+            '$localStorage',
+            '$location'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
             private $scope,
-            $localStorage
+            $localStorage,
+            $location
             ) {
 
             var baseUrl = "http://localhost:51941/api";
@@ -35,6 +37,19 @@ module ossApp.controllers {
                 });
             });
 
+            $scope.addTemp = (value: any) => {
+                //check if item is repeated
+                if ($scope.tempIndex.length > 0) {
+                    //if element doesn't exist
+                    if ($scope.tempIndex.indexOf(value) === -1) {
+                        $scope.tempIndex.push(value);
+                    }
+                }
+                else {
+                    $scope.tempIndex.push(value);
+                }
+            };
+
             $scope.removeTemp = (value: any) => {
                 //don't remove index if array is empty
                 if ($scope.tempIndex.length > 0) {
@@ -51,21 +66,24 @@ module ossApp.controllers {
             $scope.approve = () => {
                 //clear temp array
                 var x = $scope.tempIndex;
-                var methodUrl = "";
+                var methodUrl = "/Inventory/AprroveInvForm";
                 
 
-                //for (var i = 0; i < $scope.tempIndex.length; i++) {
-                //    var index = $scope.tempIndex[i];
-                //    HttpService.serverPost(baseUrl + methodUrl, form,(results, status) => {
-                //        var x = results;
-                //        console.log('status->', status);
-                //    });
+                for (var i = 0; i < $scope.tempIndex.length; i++) {
+                    var index = $scope.tempIndex[i];
+                    var form = $scope.forms[index];
+                    HttpService.serverPost(baseUrl + methodUrl, form,(results, status) => {
+                        var x = results;
+                        console.log('status->', status);
+                        window.alert('Processed successgfully');
+                        $location.path('/userAdministration');
+                    });
 
-                //}
+                }
 
-                //HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {                                                                     
-                //    var x = results;
-                //});
+                HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {                                                                     
+                    var x = results;
+                });
             };
 
             $scope.openCrateModal = (index) => {

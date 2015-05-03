@@ -8,13 +8,15 @@ module ossApp.controllers {
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
             '$scope',
-            '$localStorage'
+            '$localStorage',
+            '$location'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
             HttpService: ossApp.Interfaces.HttpService,
             public $scope,
-            $localStorage
+            $localStorage,
+            $location
             ) {
             var baseUrl = "http://localhost:51941/api";
             //make call on page load
@@ -78,7 +80,10 @@ module ossApp.controllers {
                     HttpService.serverPost(baseUrl + methodUrl, email ,(results, status) => {        
                         var x = results;
                         console.log('status->', status);
+                        window.alert('Processed successgfully');
+                        $location.path('/userAdministration');
                     });
+                    
 
                 }
 
