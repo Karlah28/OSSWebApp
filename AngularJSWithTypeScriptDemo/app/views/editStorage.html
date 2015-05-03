@@ -114,7 +114,7 @@
                             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListModal" ng-click="compileModalItems(crate.ItemList); modalReverse='true'">
                                 Item List
                             </button>
-                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListBuilderModal" ng-click="modalReverse='true'">
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crateListBuilderModal" ng-click="modalReverse='true'; setCurrentCrate(crate); getItems()">
                                 Edit Item List
                             </button>
                         </td>
@@ -149,7 +149,7 @@
                             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListModal" ng-click="compileProjectModalItems(project); modalReverse='true'">
                                 Item List
                             </button>
-                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListBuilderModal" ng-click="modalReverse='true'">
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#projectListBuilderModal" ng-click="modalReverse='true'; setCurrentProject(project); getItems()">
                                 Edit Item List
                             </button>
                         </td>
@@ -184,7 +184,7 @@
         <br />
     </div> <!---end panels/display tabs-->
 
-    <!-- modal for crate item list display-->
+    <!-- crate item list modal-->
     <div class="fade modal" id="crateListModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -197,8 +197,8 @@
                         <th><a href="" ng-click="predicate ='Label'; modalReverse=!modalReverse">Label</a></th>
                         <th><a href="" ng-click="predicate ='Quantity'; modalReverse=!modalReverse">Quantity</a></th>
                         <tr ng-repeat="modalItem in modalItems | orderBy:predicate:modalReverse">
-                            <td>{{modalItem.Label}}</td>
-                            <td>{{modalItem.Quantity}}</td>
+                            <td>{{modalItem.ItemName}}</td>
+                            <td>{{modalItem.ItemQuantity}}</td>
                         </tr>
                     </table>
                 </div>
@@ -282,7 +282,7 @@
                             </td>
                             <td>
                                 <ng-form>
-                                    <label>Item Status : {{item.ItemStatus}} (1 for in 0 for out)</label>
+                                    <label>Item Status : {{item.ItemStatus}} (CheckIn or CheckOut)</label>
                                     <input type="text" class="form-control" ng-model="item.ItemStatus">
                                 </ng-form>
                             </td>
@@ -290,8 +290,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    {{checkedItems}}
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editItems(checkedItems)">Submit Changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editItems(checkedItems); clearCheckedItems()">Submit Changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -345,7 +344,7 @@
                             </td>
                             <td>
                                 <ng-form>
-                                    <label>Crate Status : {{crate.CrateStatus}} (1 for in 0 for out)</label>
+                                    <label>Crate Status : {{crate.CrateStatus}} (CheckIn or CheckOut)</label>
                                     <input type="text" class="form-control" ng-model="crate.CrateStatus">
                                 </ng-form>
                             </td>
@@ -354,7 +353,8 @@
                     <!-- collapsable thing that lists items-->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editCrates(checkedCrates)">Submit Changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="getCrates()">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -411,7 +411,7 @@
                         <th><a href="">Quantity Needed (0 is default)</a></th>
                         <tr ng-repeat="myItem in allItems  | orderBy:predicate:modalReverse">
                             <td>
-                                <input type="checkbox" name="identifier" ng-value="myItem" ng-click="toggleBuilder(myItem)" />
+                                <input type="checkbox" name="identifier" ng-value="myItem" ng-click="toggleBuilder(myItem.ItemName, QuantityNeeded)" />
                             </td>
                             <td>
                                 {{myItem.ItemName}}
@@ -419,14 +419,14 @@
                             <td>
                                 <ng-form>
                                     <label>Quantity Needed</label>
-                                    <input type="text" class="form-control" ng-model="project.QuantityNeeded">
+                                    <input type="text" class="form-control" ng-model="QuantityNeeded">
                                 </ng-form>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editProjectItems; clearBuilder()">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editProjectItems(checkedBuilder, currentProject); clearBuilder()">Submit Changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder()">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -457,7 +457,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editCrateItems(); clearBuilder()">Submit Changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editCrateItems(checkedBuilder, currentCrate); clearBuilder()">Submit Changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder()">Close</button>
                 </div>
             </div><!-- /.modal-content -->

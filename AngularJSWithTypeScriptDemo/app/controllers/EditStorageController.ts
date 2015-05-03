@@ -20,22 +20,26 @@ module ossApp.controllers {
 
             //this is your local storage
             
-            $scope.serverUrl = "192.168.1.107:51941/api";
+            $scope.serverUrl = "http://localhost:51941/api";
             
             //var favorites: Array<ossApp.Interfaces.ITrack>;
             //this.NavbarService = NavbarService;
 
             //these three variables contain the populating items
+            $scope.currentProject = {};
+            $scope.checkedBuilder = [];
             $scope.allItems = [];
             $scope.allCrates = [];
             $scope.allProjects = [];
             $scope.itemArray = []; //array to contain all checkboxed items
+            $scope.currentCrate = {};
 
             //$scope.cratesList: Array<ossApp.Interfaces.Item>;
             $scope.title = "Storage Management";
 
 
             //BE SURE AND CONVERT ITEM STATUSES TO A PROPER STRING TO DISPLAY WHEN YOU IMPORT THEM
+            /*
             $scope.allItems = [
                 { ItemName: "this", ItemQuantity: 4, EPCData: "l;aksjdflkj21" },
                 { ItemName: "this2", ItemQuantity: 20, EPCData: "al;sjoiwer" }
@@ -53,53 +57,90 @@ module ossApp.controllers {
                 { EPCData: "l;kjsdlkjiowuerkmlx" },
                 { EPCData: "i3141234lkjkl" }
             ];
-
+            */
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            $scope.addItems = (item) => {
-                console.log("bs")
-                //this is the Route specified in the server's controllers 
+            $scope.addItems = (items) => {
+                //this function is unfinished
                 console.log($scope.myItem);
-                var urlController = "/InventoryController/AddItem";
+                var urlController = "/Inventory/AddItem";
                 HttpService.serverPost($scope.serverUrl + urlController, item, (response) => {
                     var x = response;
                 });
             };
-            $scope.editItems = (item) => {
-                console.log("bs")
-                //this is the Route specified in the server's controllers 
-                console.log($scope.myItem);
-                var urlController = "/InventoryController/AddItem";
-                HttpService.serverPost($scope.serverUrl + urlController, item,(response) => {
+            $scope.editItems = (items) => {
+                var urlController = "/Inventory/EditItem";
+                for (var i = 0; i < items.length; i++) {
+                    HttpService.serverPost($scope.serverUrl + urlController, items[i],(response) => {
+                        var x = response;
+                    });
+                }
+            };
+            $scope.editCrates = (crates) => {
+                var urlController = "/Inventory/EditCrate";
+                for (var i = 0; i < crates.length; i++) {
+                    HttpService.serverPost($scope.serverUrl + urlController, crates[i],(response) => {
+                        var x = response;
+                    });
+                }
+            };
+            
+            $scope.editCrateItems = (items,crate) => {
+                crate.ItemList = items;
+                var urlController = "/Inventory/EditCrate";
+                HttpService.serverPost($scope.serverUrl + urlController, crate,(response) => {
                     var x = response;
                 });
+            };
+
+            $scope.setCurrentCrate = (crate) => {
+                $scope.currentCrate = crate;
+            };
+
+
+            $scope.editProjectItems = (nameQuanObjectList, project) => {
+                project.ItemList = [];
+                project.QuantityNeeded = [];
+                for (var i = 0; i < nameQuanObjectList.length; i++) {
+                    project.ItemList.push(nameQuanObjectList[i].ItemName);
+                    project.QuantityNeeded.push(nameQuanObjectList[i].QuantityNeeded);
+                }
+                var urlController = "/Inventory/EditProject";
+                HttpService.serverPost($scope.serverUrl + urlController, project,(response) => {
+                    var x = response;
+                });
+            };
+
+            $scope.setCurrentProject = (project) => {
+                $scope.currentProject = project;
             };
 
   
 
 
             $scope.getItems = () => {
-                console.log("bs")
                 //this is the Route specified in the server's controllers 
-                var urlController = "/InventoryController/ViewItems";
+                var urlController = "/Inventory/ViewItems";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    $scope.allItems = [];
                     for (var i = 0; i < response.length; i++) {
                         $scope.allItems.push(response[i]);
                     } 
                 });         
             };
             $scope.getCrates = () => {
-                var urlController = "/InventoryController/ViewCrates";
+                var urlController = "/Inventory/ViewCrates";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    $scope.allCrates = [];
                     for (var i = 0; i < response.length; i++) {
                         $scope.allCrates.push(response[i]);
                     }
                 });
             };
-            $scope.getItems = () => {
-                console.log("bs")
+            $scope.getProjects = () => {
                 //this is the Route specified in the server's controllers 
-                var urlController = "/InventoryController/ViewProjects";
+                var urlController = "/Inventory/ViewProjects";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    $scope.allProjects = [];
                     for (var i = 0; i < response.length; i++) {
                         $scope.allProjects.push(response[i]);
                     }
@@ -133,6 +174,11 @@ module ossApp.controllers {
                 }
             };
 
+            $scope.clearCheckedItems = () => {
+                $scope.checkedItems = [];
+            };
+
+
             //checkbox toggler used for crates tab
             $scope.checkedCrates = [];
             $scope.toggleCrate = (crate) => {
@@ -150,6 +196,10 @@ module ossApp.controllers {
                 else {
                     $scope.checkedCrates.push(crate);
                 }
+            };
+
+            $scope.clearCheckedCrates = () => {
+                $scope.checkedCrates = [];
             };
 
 
@@ -170,6 +220,10 @@ module ossApp.controllers {
                 else {
                     $scope.checkedProjects.push(project);
                 }
+            };
+
+            $scope.clearCheckedProjects = () => {
+                $scope.checkedProjects = [];
             };
 
             //used for the new items tab
@@ -193,21 +247,39 @@ module ossApp.controllers {
 
 
             //used for checkboxes in modals.. checked stuff in modals will be stored in checkedBuilder
-            $scope.checkedBuilder = [];
+
             $scope.toggleBuilder = (item) => {
                 var found = 0
                 var index = 0
-                for (var i = 0; i < $scope.checkedNewItems.length; i++) {
-                    if ($scope.checkedNewItems[i] == item) {
+                for (var i = 0; i < $scope.checkedBuilder.length; i++) {
+                    if ($scope.checkedBuilder[i] == item) {
                         found = 1;
                         index = i;
                     }
                 }
                 if (found == 1) {
-                    $scope.checkedNewItems.splice(index, 1);
+                    $scope.checkedBuilder.splice(index, 1);
                 }
                 else {
-                    $scope.checkedNewItems.push(item);
+                    $scope.checkedBuilder.push(item);
+                }
+            };
+
+            $scope.toggleBuilder = (ItemName, QuantityNeeded) => {
+                var found = 0
+                var index = 0
+                var tempObject = {ItemName : ItemName, QuantityNeeded : QuantityNeeded};
+                for (var i = 0; i < $scope.checkedBuilder.length; i++) {
+                    if ($scope.checkedBuilder[i] == tempObject) {
+                        found = 1;
+                        index = i;
+                    }
+                }
+                if (found == 1) {
+                    $scope.checkedBuilder.splice(index, 1);
+                }
+                else {
+                    $scope.checkedBuilder.push(tempObject);
                 }
             };
 
@@ -230,7 +302,7 @@ module ossApp.controllers {
                 }
             };
             
-           
+            $scope.modalItems = [];
             $scope.compileModalItems = (itemList) => {
                 $scope.modalItems = itemList;
             };
