@@ -290,7 +290,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editItems(checkedItems); clearCheckedItems()">Submit Changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editItems(checkedItems)">Submit Changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -388,7 +388,9 @@
                         </tr>
                     </table>
                 </div>
+                {{checkedProjects}}
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editProject(checkedProjects)">Submit Changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -457,8 +459,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editCrateItems(checkedBuilder, currentCrate); clearBuilder()">Submit Changes</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder()">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editCrateItems(checkedBuilder, currentCrate); clearBuilder(); forceReload()">Submit Changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder(); forceReload()">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

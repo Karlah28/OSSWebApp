@@ -26,6 +26,7 @@ module ossApp.controllers {
             //this.NavbarService = NavbarService;
 
             //these three variables contain the populating items
+            $scope.QuantityNeeded = 0
             $scope.currentProject = {};
             $scope.checkedBuilder = [];
             $scope.allItems = [];
@@ -52,12 +53,10 @@ module ossApp.controllers {
                 { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] },
                 { ProjectName: "myname2", Description: "some stuff about the project that might be too long 2", ItemList: ["this2", "that2", "the other thing2"], QuantityNeeded: [2, 3, 4] }
             ];
-            $scope.newItems = [
-                { EPCData: "lkjaskdiouwerklj" },
-                { EPCData: "l;kjsdlkjiowuerkmlx" },
-                { EPCData: "i3141234lkjkl" }
-            ];
             */
+            $scope.newItems = [
+                { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } } 
+            ];
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             $scope.addItems = (items) => {
                 //this function is unfinished
@@ -102,8 +101,15 @@ module ossApp.controllers {
                 project.QuantityNeeded = [];
                 for (var i = 0; i < nameQuanObjectList.length; i++) {
                     project.ItemList.push(nameQuanObjectList[i].ItemName);
-                    project.QuantityNeeded.push(nameQuanObjectList[i].QuantityNeeded);
+                    project.QuantityNeeded.push(parseInt(nameQuanObjectList[i].QuantityNeeded));
                 }
+                var urlController = "/Inventory/EditProject";
+                HttpService.serverPost($scope.serverUrl + urlController, project,(response) => {
+                    var x = response;
+                });
+            };
+
+            $scope.editProject = (project) => {
                 var urlController = "/Inventory/EditProject";
                 HttpService.serverPost($scope.serverUrl + urlController, project,(response) => {
                     var x = response;

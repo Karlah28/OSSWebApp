@@ -13,6 +13,7 @@ var ossApp;
                 //var favorites: Array<ossApp.Interfaces.ITrack>;
                 //this.NavbarService = NavbarService;
                 //these three variables contain the populating items
+                $scope.QuantityNeeded = 0;
                 $scope.currentProject = {};
                 $scope.checkedBuilder = [];
                 $scope.allItems = [];
@@ -36,12 +37,10 @@ var ossApp;
                     { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] },
                     { ProjectName: "myname2", Description: "some stuff about the project that might be too long 2", ItemList: ["this2", "that2", "the other thing2"], QuantityNeeded: [2, 3, 4] }
                 ];
-                $scope.newItems = [
-                    { EPCData: "lkjaskdiouwerklj" },
-                    { EPCData: "l;kjsdlkjiowuerkmlx" },
-                    { EPCData: "i3141234lkjkl" }
-                ];
                 */
+                $scope.newItems = [
+                    { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } }
+                ];
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 $scope.addItems = function (items) {
                     //this function is unfinished
@@ -82,8 +81,14 @@ var ossApp;
                     project.QuantityNeeded = [];
                     for (var i = 0; i < nameQuanObjectList.length; i++) {
                         project.ItemList.push(nameQuanObjectList[i].ItemName);
-                        project.QuantityNeeded.push(nameQuanObjectList[i].QuantityNeeded);
+                        project.QuantityNeeded.push(parseInt(nameQuanObjectList[i].QuantityNeeded));
                     }
+                    var urlController = "/Inventory/EditProject";
+                    HttpService.serverPost($scope.serverUrl + urlController, project, function (response) {
+                        var x = response;
+                    });
+                };
+                $scope.editProject = function (project) {
                     var urlController = "/Inventory/EditProject";
                     HttpService.serverPost($scope.serverUrl + urlController, project, function (response) {
                         var x = response;
