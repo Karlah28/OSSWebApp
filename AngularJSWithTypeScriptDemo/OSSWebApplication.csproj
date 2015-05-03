@@ -64,6 +64,7 @@
   <ItemGroup>
     <Content Include="app\services\ngStorage.js" />
     <Content Include="app\views\addInventory.html" />
+    <Content Include="app\views\manageInventoryForms.html" />
     <Content Include="app\views\viewInventory.html" />
     <Content Include="app\views\editStorage.html" />
     <Content Include="app\views\landingPage.html" />
@@ -100,6 +101,7 @@
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routes.ts" />
     <TypeScriptCompile Include="app\controllers\AddInventoryController.ts" />
+    <TypeScriptCompile Include="app\controllers\ManageFormController.ts" />
     <TypeScriptCompile Include="app\controllers\ViewInventoryController.ts" />
     <TypeScriptCompile Include="app\controllers\EditStorageController.ts" />
     <TypeScriptCompile Include="app\controllers\LoginController.ts" />

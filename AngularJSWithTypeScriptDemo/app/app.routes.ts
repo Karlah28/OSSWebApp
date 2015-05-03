@@ -28,7 +28,11 @@ module ossApp {
                 .when("/addInventory", {
                 controller: "ossApp.controllers.AddInventoryController",
                 templateUrl: "/app/views/addInventory.html"
-            })
+                })
+                .when("/manageInventoryForms", {
+                controller: "ossApp.controllers.ManageFormController",
+                templateUrl: "/app/views/manageInventoryForms.html"
+                })
                 .otherwise({
                 redirectTo: '/home'
             });
