@@ -63,9 +63,14 @@ module ossApp.controllers {
 
                 //}
 
-                //HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {
+                //HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {                                                                     
                 //    var x = results;
                 //});
+            };
+
+            $scope.openCrateModal = (index) => {
+                $scope.modalData = null;
+                $scope.modalData = $scope.forms[index].RequestedCrates;
             };
 
 
