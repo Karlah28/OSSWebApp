@@ -46,7 +46,7 @@ var ossApp;
                     }
                 };
                 //send approved users
-                $scope.approve = function () {
+                $scope.deny = function () {
                     //clear temp array
                     var x = $scope.tempIndex;
                     var methodUrl = "/Inventory/AprroveInvForm";
@@ -54,15 +54,11 @@ var ossApp;
                         var index = $scope.tempIndex[i];
                         var form = $scope.forms[index];
                         HttpService.serverPost(baseUrl + methodUrl, form, function (results, status) {
-                            var x = results;
-                            console.log('status->', status);
-                            window.alert('Processed successgfully');
-                            $location.path('/userAdministration');
+                            window.alert('Processed successfully');
+                            $scope.prospects.splice(index, 1);
+                            $location.path('/manageInventoryForms');
                         });
                     }
-                    HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email, function (results) {
-                        var x = results;
-                    });
                 };
                 $scope.openCrateModal = function (index) {
                     $scope.crateModalData = [];

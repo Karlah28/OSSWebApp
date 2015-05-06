@@ -32,7 +32,7 @@ var ossApp;
                         $localStorage.isLogged = true;
                         $rootScope.isLogged = $localStorage.isLogged;
                         $location.url('/storageManagement');
-                        $rootScope.isAdmin = false;
+                        $rootScope.isAdmin = true;
                     }
                     else {
                         console.log("login failed");

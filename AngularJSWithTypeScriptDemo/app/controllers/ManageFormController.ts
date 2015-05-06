@@ -63,27 +63,20 @@ module ossApp.controllers {
             };
 
             //send approved users
-            $scope.approve = () => {
+            $scope.deny = () => {
                 //clear temp array
                 var x = $scope.tempIndex;
                 var methodUrl = "/Inventory/AprroveInvForm";
-                
-
                 for (var i = 0; i < $scope.tempIndex.length; i++) {
                     var index = $scope.tempIndex[i];
                     var form = $scope.forms[index];
                     HttpService.serverPost(baseUrl + methodUrl, form,(results, status) => {
-                        var x = results;
-                        console.log('status->', status);
-                        window.alert('Processed successgfully');
-                        $location.path('/userAdministration');
+                        window.alert('Processed successfully');
+                        $scope.prospects.splice(index, 1);
+                        $location.path('/manageInventoryForms');
                     });
 
                 }
-
-                HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {                                                                     
-                    var x = results;
-                });
             };
 
             $scope.openCrateModal = (index) => {

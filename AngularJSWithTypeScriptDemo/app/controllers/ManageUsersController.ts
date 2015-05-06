@@ -72,26 +72,16 @@ module ossApp.controllers {
                 //clear temp array
                 var x = $scope.tempIndex;
                 var methodUrl = "/Account/ApproveUser";
-                
                 for (var i = 0; i < $scope.tempIndex.length; i++){
                     var index = $scope.tempIndex[i];
                     var email = prospects[index].Email;                    
                     console.log(email);
                     HttpService.serverPost(baseUrl + methodUrl, email ,(results, status) => {        
-                        var x = results;
-                        console.log('status->', status);
-                        window.alert('Processed successgfully');
+                        window.alert('Processed successfully');
+                        $scope.prospects.splice(index, 1);
                         $location.path('/userAdministration');
                     });
-                    
-
                 }
-
-
-
-                //HttpService.serverPost(baseUrl + methodUrl, $scope.TempProspects.Email,(results) => {
-                //    var x = results;
-                //});
             };
 
             //send denied users
