@@ -9,11 +9,10 @@ module ossApp.controllers {
         static $inject = [
             "ossApp.Services.NavbarService",
             'ossApp.Services.HttpService',
-            //'ossApp.Services.LoginService',
             '$scope',
             '$location',
-            '$localStorage'
-            //'Login'
+            '$localStorage',
+            '$rootScope'
         ];
         constructor(
             NavbarService: ossApp.Interfaces.INavbarService,
@@ -21,12 +20,13 @@ module ossApp.controllers {
             //LoginService: ossApp.Services.LoginService,
             $scope,
             $location,
-            $localStorage
-            //Login                                                
+            $localStorage,
+            $rootScope
+        //Login                                                
             ) {
 
             $scope.title = "Login or Register";
-            var favorites: Array<ossApp.Interfaces.ITrack>;
+            //var favorites: Array<ossApp.Interfaces.ITrack>;
             this.NavbarService = NavbarService;
             var url = "your local host"; 
             
@@ -37,6 +37,11 @@ module ossApp.controllers {
 
             $scope.userEmail = "karla@mavs.uta"
             $scope.password = "admin";
+
+            if ($localStorage.isLogged === null || $localStorage.isLogged === undefined) {
+                $localStorage.isLogged = false;
+            }
+            
 
             $scope.loginUser = function() {
                 //create a registered user 
@@ -49,8 +54,12 @@ module ossApp.controllers {
                     console.log("login Success");
                     alert("login success!");
                     //LoginService.login(true);
+                    $localStorage.isLogged = true;
+                    $rootScope.isLogged = $localStorage.isLogged;
                     $location.url('/storageManagement');
+                    $rootScope.isAdmin = false;
                 }
+                
                 else {                                                                
                     console.log("login failed");
                     window.alert("Invalid Credentials, Please Try Again!");
@@ -60,6 +69,12 @@ module ossApp.controllers {
             $scope.register = () => {
 
 
+
+            }
+
+            $rootScope.logout = () => {
+                $localStorage.isLogged = null;
+                $rootScope.isLogged = false;
 
             }
 

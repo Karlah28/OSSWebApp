@@ -9,15 +9,18 @@ var ossApp;
         var LoginController = (function () {
             function LoginController(NavbarService, HttpService, 
                 //LoginService: ossApp.Services.LoginService,
-                $scope, $location, $localStorage) {
+                $scope, $location, $localStorage, $rootScope) {
                 $scope.title = "Login or Register";
-                var favorites;
+                //var favorites: Array<ossApp.Interfaces.ITrack>;
                 this.NavbarService = NavbarService;
                 var url = "your local host";
                 //$localStorage.message = "Karla";
                 //$scope.karla = $localStorage.message;
                 $scope.userEmail = "karla@mavs.uta";
                 $scope.password = "admin";
+                if ($localStorage.isLogged === null || $localStorage.isLogged === undefined) {
+                    $localStorage.isLogged = false;
+                }
                 $scope.loginUser = function () {
                     //create a registered user 
                     //Send it using the service
@@ -26,7 +29,10 @@ var ossApp;
                         console.log("login Success");
                         alert("login success!");
                         //LoginService.login(true);
+                        $localStorage.isLogged = true;
+                        $rootScope.isLogged = $localStorage.isLogged;
                         $location.url('/storageManagement');
+                        $rootScope.isAdmin = false;
                     }
                     else {
                         console.log("login failed");
@@ -35,13 +41,18 @@ var ossApp;
                 };
                 $scope.register = function () {
                 };
+                $rootScope.logout = function () {
+                    $localStorage.isLogged = null;
+                    $rootScope.isLogged = false;
+                };
             }
             LoginController.$inject = [
                 "ossApp.Services.NavbarService",
                 'ossApp.Services.HttpService',
                 '$scope',
                 '$location',
-                '$localStorage'
+                '$localStorage',
+                '$rootScope'
             ];
             return LoginController;
         })();

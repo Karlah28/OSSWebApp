@@ -93,16 +93,16 @@
                 <li>
                     <a ng-href="#/login">Login/Register</a>
                 </li>
-                <li>
+                <li ng-show="isAdmin">
                     <a href="#/userAdministration">User Management</a>
                 </li>
-                <li>
+                <li ng-show="isLogged">
                     <a href="#/viewInventory">View Inventory</a>
                 </li>
-                <li>
+                <li ng-show="isAdmin">
                     <a href="#/editStorage">Manage Inventory</a>
                 </li>
-                <li>
+                <li ng-show="isAdmin">
                     <a href="#/manageInventoryForms">Manage Inventory Request Forms</a>
                 </li>
                 <li>
@@ -114,7 +114,7 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
-                <li ng-show="isAdmin">
+                <li ng-show="isLogged" ng-click="logout()">
                     <a href="#">Logout</a>
                 </li>
             </ul>
