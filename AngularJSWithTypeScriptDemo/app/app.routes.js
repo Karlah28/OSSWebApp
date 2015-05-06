@@ -6,7 +6,10 @@ var ossApp;
         function Routes() {
         }
         Routes.configureRoutes = function ($routeProvider) {
-            $routeProvider.when("/home", {
+            $routeProvider.when("/index", {
+                controller: "ossApp.controllers.LoginController",
+                templateUrl: "/Index.html"
+            }).when("/home", {
                 controller: "ossApp.controllers.HomeController",
                 templateUrl: "/app/views/landingPage.html"
             }).when("/login", {

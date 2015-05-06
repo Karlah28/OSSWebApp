@@ -5,6 +5,10 @@ module ossApp {
         static $inject = ["$routeProvider"];
         static configureRoutes($routeProvider: ng.route.IRouteProvider) {
             $routeProvider
+                .when("/index", {
+                controller: "ossApp.controllers.LoginController",
+                templateUrl: "/Index.html"
+                })
                 .when("/home", {
                 controller: "ossApp.controllers.HomeController",
                 templateUrl: "/app/views/landingPage.html"
