@@ -281,7 +281,7 @@
                             </td>
                             <td>
                                 <ng-form>
-                                    <label>Item Status : {{item.ItemStatus}} (CheckIn or CheckOut)</label>
+                                    <label>Item Status : {{item.ItemStatus}} (0 for in 1 for out)</label>
                                     <input type="text" class="form-control" ng-model="item.ItemStatus">
                                 </ng-form>
                             </td>
@@ -343,7 +343,7 @@
                             </td>
                             <td>
                                 <ng-form>
-                                    <label>Crate Status : {{crate.CrateStatus}} (CheckIn or CheckOut)</label>
+                                    <label>Crate Status : {{crate.CrateStatus}} (0 for in 1 for out)</label>
                                     <input type="text" class="form-control" ng-model="crate.CrateStatus">
                                 </ng-form>
                             </td>
@@ -459,7 +459,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editCrateItems(checkedBuilder, currentCrate); clearBuilder(); forceReload()">Submit Changes</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder(); forceReload()">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder()">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -512,7 +512,7 @@
                             </td>
                             <td>
                                 <ng-form>
-                                    <label>Item Status</label>
+                                    <label>Item Status (0 for in 1 for out)</label>
                                     <input type="text" class="form-control" ng-model="item.ItemStatus">
                                 </ng-form>
                             </td>
@@ -577,7 +577,7 @@
                             </td>
                             <td>
                                 <ng-form>
-                                    <label>Crate Status</label>
+                                    <label>Crate Status (0 for in 1 for out)</label>
                                     <input type="text" class="form-control" ng-model="crate.CrateStatus">
                                 </ng-form>
                             </td>
