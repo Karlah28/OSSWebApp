@@ -30,6 +30,20 @@
             $scope.serverUrl = "http://localhost:51941/api";
 
 
+            $scope.request = (request, checkedItems, checkedCrates) => {
+                var urlController = "/Inventory/RequestInvForm";
+                request.RequestedCrates = checkedCrates;
+                request.RequestedItems = checkedItems;
+                request.InventoryType = 0;
+                request.ObjectType = 0;
+                request.CheckOutDate = request.CheckOutDate + "T19: 12:33.5289978 - 05:00";
+                request.ReturnDate = request.ReturnDate + "T19: 12:33.5289978 - 05:00";
+                console.log(request.ReturnDate);
+                HttpService.serverPost($scope.serverUrl + urlController, request,(response) => {
+                    var x = response;
+                });
+            };
+
             $scope.getItems = () => {
                 //this is the Route specified in the server's controllers 
                 var urlController = "/Inventory/ViewItems";
@@ -118,6 +132,11 @@
                 else {
                     $scope.checkedProjects.push(project);
                 }
+            };
+
+            $scope.clearAll = () => {
+                $scope.checkedCrates = [];
+                $scope.checkedItems = [];
             };
 
             //MODAL ITEMS STUFF===============================================

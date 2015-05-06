@@ -17,21 +17,21 @@
         things are dealth with-->
     <div ng-if="items" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editItemModal">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
+        <button type="button" class="btn btn-default" ng-click="deleteItems(checkedItems); getItems()">Delete</button>
         <br />
         <br />
         <h5>Note: once you choose to edit an item, the old item information will be deleted</h5>
     </div>
     <div ng-if="crates" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editCrateModal">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
+        <button type="button" class="btn btn-default" ng-click="deleteCrates(checkedCrates); getCrates()">Delete</button>
         <br />
         <br />
         <h5>Note: once you choose to edit an item, the old item information will be deleted</h5>
     </div>
     <div ng-if="projects" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editProjectModal">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
+        <button type="button" class="btn btn-default" ng-click="deleteProjects(checkedProjects); getProjects()">Delete</button>
         <br />
         <br />
         <h5>Note: once you choose to edit an item, the old item information will be deleted</h5>
@@ -39,8 +39,7 @@
     <div ng-if="new" class="btn-group" role="group">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addItemModal">Add as Item</button>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addCrateModal">Add as Crate</button>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addProjectModal">Add a Project</button>
-        <button type="button" class="btn btn-default">Delete</button>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addProjectModal" ng-click="getItems()">Add a Project</button>
         <br />
         <br />
         <h5>Note: you must refresh the page if you cancel your changes</h5>
@@ -59,10 +58,10 @@
 
     <div>
         <ul class="nav nav-tabs">
-            <li role="presentation" ng-model="items" ng-click="items=true; crates=false; projects=false; new=false; getItems(); reverse='true'"><a href="">Items</a></li>
-            <li role="presentation" ng-model="crates" ng-click="crates=true; items=false; projects=false; new=false; getCrates(); reverse='true'"><a href="">Crates</a></li>
-            <li role="presentation" ng-model="projects" ng-click="projects=true; items=false; crates=false; new=false; getProjects(); reverse='true'"><a href="">Projects</a></li>
-            <li role="presentation" ng-click="projects=false; items=false; crates=false; new=true; getNewInventory(); reverse='true'"><a href="">New Tags/Inventory</a></li> <!-- no ng-model.. not sure what that does-->
+            <li role="presentation" ng-model="items" ng-click="items=true; crates=false; projects=false; new=false; getItems(); reverse='true'; clearAllChecks()"><a href="">Items</a></li>
+            <li role="presentation" ng-model="crates" ng-click="crates=true; items=false; projects=false; new=false; getCrates(); reverse='true'; clearAllChecks()"><a href="">Crates</a></li>
+            <li role="presentation" ng-model="projects" ng-click="projects=true; items=false; crates=false; new=false; getProjects(); reverse='true'; clearAllChecks()"><a href="">Projects</a></li>
+            <li role="presentation" ng-click="projects=false; items=false; crates=false; new=true; getNewInventory(); reverse='true'; clearAllChecks()"><a href="">New Tags/Inventory</a></li> <!-- no ng-model.. not sure what that does-->
         </ul>
     </div>
 
@@ -490,7 +489,7 @@
                             <td>
                                 <ng-form>
                                     <label>Item Name</label>
-                                    <input type="text" class=control" ng-model="item.ItemName">
+                                    <input type="text" class="form-control" ng-model="item.ItemName">
                                 </ng-form>
                             </td>
                             <td>
@@ -521,9 +520,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <!-- NEED TO ADD FUNCTIONALITY TO THIS BUTTON-->
-                    {{checkedNewItems}}
-                    <button type="button" class="btn btn-default" ng-click="addItems(myItem)">Submit</button>
+                    <!-- NEED TO ADD FUNCTIONALITY TO THIS BUTTON -->
+                    <button type="button" class="btn btn-default" ng-click="addItems(checkedNewItems)" data-dismiss="modal">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -587,6 +585,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="addCrates(checkedNewItems)" data-dismiss="modal">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -628,7 +627,7 @@
                         <th><a href="">Quantity Needed (0 is default)</a></th>
                         <tr ng-repeat="myItem in allItems  | orderBy:predicate:modalReverse">
                             <td>
-                                <input type="checkbox" name="identifier" ng-value="myItem" ng-click="toggleBuilder(myItem)" />
+                                <input type="checkbox" name="identifier" ng-value="myItem" ng-click="toggleBuilder(myItem.ItemName, QuantityNeeded)" />
                             </td>
                             <td>
                                 {{myItem.ItemName}}
@@ -636,15 +635,15 @@
                             <td>
                                 <ng-form>
                                     <label>Quantity Needed</label>
-                                    <input type="text" class="form-group" ng-model="project.QuantityNeeded">
+                                    <input type="text" class="form-group" ng-model="QuantityNeeded">
                                 </ng-form>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="addProject(myItem)">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" ng-click="addProject(project, checkedBuilder); clearBuilder()" data-dismiss="modal">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearBuilder()">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

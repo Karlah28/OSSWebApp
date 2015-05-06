@@ -55,14 +55,76 @@ module ossApp.controllers {
             ];
             */
             $scope.newItems = [
-                { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } } 
+                { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                { EPCData: { EPC: "3C", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                { EPCData: { EPC: "3D", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                { EPCData: { EPC: "3E", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                { EPCData: { EPC: "3F", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } }
             ];
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+            $scope.deleteItems = (items) => {
+                var urlController = "/Inventory/DeleteItem";
+                for (var i = 0; i < items.length; i++) {
+                    HttpService.serverPost($scope.serverUrl + urlController, items[i].EPCData.EPC,(response) => {
+                        var x = response;
+                    });
+                }
+            };
+            $scope.deleteCrates = (crates) => {
+                var urlController = "/Inventory/DeleteCrate";
+                for (var i = 0; i < crates.length; i++) {                       //NEED TO PASS A BOOLEAN HERE **********
+                    HttpService.serverPost($scope.serverUrl + urlController, crates[i].EPCData.EPC,(response) => {
+                        var x = response;
+                    });
+                }
+            };
+            $scope.deleteProjects = (projects) => {
+                var urlController = "/Inventory/DeleteProject";
+                for (var i = 0; i < projects.length; i++) {
+                    HttpService.serverPost($scope.serverUrl + urlController, projects[i].ProjectName,(response) => {
+                        var x = response;
+                    });
+                }
+            };
+
             $scope.addItems = (items) => {
                 //this function is unfinished
-                console.log($scope.myItem);
                 var urlController = "/Inventory/AddItem";
-                HttpService.serverPost($scope.serverUrl + urlController, item, (response) => {
+                for (var i = 0; i < items.length; i++) {
+                    items[i].InventoryType = 0;
+                    items[i].ObjectType = 0;
+                    items[i].ItemLocation = "";
+                    if (!items[i].ItemProject) {
+                        items[i].ItemProject = null 
+                    }
+                    if (!items[i].CrateID) {
+                        items[i].CrateID = -1
+                    }
+                    HttpService.serverPost($scope.serverUrl + urlController, items[i],(response) => {
+                        var x = response;
+                    });
+                }
+            };
+            $scope.addCrates = (crates) => {
+                var urlController = "/Inventory/AddCrate";
+                for (var i = 0; i < crates.length; i++) {
+                    HttpService.serverPost($scope.serverUrl + urlController, crates[i],(response) => {
+                        var x = response;
+                    });
+                }
+            };
+            $scope.addProject = (project, nameQuanObjectList) => {
+                var urlController = "/Inventory/AddProject";
+                project.ItemList = [];
+                project.QuantityNeeded = [];
+                project.InventoryType = 0
+                project.ObjectType = 0
+                for (var i = 0; i < nameQuanObjectList.length; i++) {
+                    project.ItemList.push(nameQuanObjectList[i].ItemName);
+                    project.QuantityNeeded.push(parseInt(nameQuanObjectList[i].QuantityNeeded));
+                }
+                HttpService.serverPost($scope.serverUrl + urlController, project,(response) => {
                     var x = response;
                 });
             };
@@ -251,6 +313,9 @@ module ossApp.controllers {
                 }
             };
 
+            $scope.clearCheckedNewItems = () => {
+                $scope.checkedNewItems = [];
+            };
 
             //used for checkboxes in modals.. checked stuff in modals will be stored in checkedBuilder
 
@@ -306,6 +371,15 @@ module ossApp.controllers {
                         $scope.crateItems = $scope.crateItems + itemList[i].Label + ", ";
                     }
                 }
+            };
+
+            $scope.clearAllChecks = () => {
+                $scope.checkedBuilder = [];
+                $scope.checkedItems = [];
+                $scope.checkedCrates = [];
+                $scope.checkedProjects = [];
+                $scope.checkedNewItems = [];
+                $scope.checkedBuilder = [];
             };
             
             $scope.modalItems = [];

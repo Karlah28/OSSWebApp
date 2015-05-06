@@ -39,14 +39,74 @@ var ossApp;
                 ];
                 */
                 $scope.newItems = [
-                    { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } }
+                    { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                    { EPCData: { EPC: "3C", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                    { EPCData: { EPC: "3D", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                    { EPCData: { EPC: "3E", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
+                    { EPCData: { EPC: "3F", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } }
                 ];
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                $scope.deleteItems = function (items) {
+                    var urlController = "/Inventory/DeleteItem";
+                    for (var i = 0; i < items.length; i++) {
+                        HttpService.serverPost($scope.serverUrl + urlController, items[i].EPCData.EPC, function (response) {
+                            var x = response;
+                        });
+                    }
+                };
+                $scope.deleteCrates = function (crates) {
+                    var urlController = "/Inventory/DeleteCrate";
+                    for (var i = 0; i < crates.length; i++) {
+                        HttpService.serverPost($scope.serverUrl + urlController, crates[i].EPCData.EPC, function (response) {
+                            var x = response;
+                        });
+                    }
+                };
+                $scope.deleteProjects = function (projects) {
+                    var urlController = "/Inventory/DeleteProject";
+                    for (var i = 0; i < projects.length; i++) {
+                        HttpService.serverPost($scope.serverUrl + urlController, projects[i].ProjectName, function (response) {
+                            var x = response;
+                        });
+                    }
+                };
                 $scope.addItems = function (items) {
                     //this function is unfinished
-                    console.log($scope.myItem);
                     var urlController = "/Inventory/AddItem";
-                    HttpService.serverPost($scope.serverUrl + urlController, item, function (response) {
+                    for (var i = 0; i < items.length; i++) {
+                        items[i].InventoryType = 0;
+                        items[i].ObjectType = 0;
+                        items[i].ItemLocation = "";
+                        if (!items[i].ItemProject) {
+                            items[i].ItemProject = null;
+                        }
+                        if (!items[i].CrateID) {
+                            items[i].CrateID = -1;
+                        }
+                        HttpService.serverPost($scope.serverUrl + urlController, items[i], function (response) {
+                            var x = response;
+                        });
+                    }
+                };
+                $scope.addCrates = function (crates) {
+                    var urlController = "/Inventory/AddCrate";
+                    for (var i = 0; i < crates.length; i++) {
+                        HttpService.serverPost($scope.serverUrl + urlController, crates[i], function (response) {
+                            var x = response;
+                        });
+                    }
+                };
+                $scope.addProject = function (project, nameQuanObjectList) {
+                    var urlController = "/Inventory/AddProject";
+                    project.ItemList = [];
+                    project.QuantityNeeded = [];
+                    project.InventoryType = 0;
+                    project.ObjectType = 0;
+                    for (var i = 0; i < nameQuanObjectList.length; i++) {
+                        project.ItemList.push(nameQuanObjectList[i].ItemName);
+                        project.QuantityNeeded.push(parseInt(nameQuanObjectList[i].QuantityNeeded));
+                    }
+                    HttpService.serverPost($scope.serverUrl + urlController, project, function (response) {
                         var x = response;
                     });
                 };
@@ -212,6 +272,9 @@ var ossApp;
                         $scope.checkedNewItems.push(item);
                     }
                 };
+                $scope.clearCheckedNewItems = function () {
+                    $scope.checkedNewItems = [];
+                };
                 //used for checkboxes in modals.. checked stuff in modals will be stored in checkedBuilder
                 $scope.toggleBuilder = function (item) {
                     var found = 0;
@@ -261,6 +324,14 @@ var ossApp;
                             $scope.crateItems = $scope.crateItems + itemList[i].Label + ", ";
                         }
                     }
+                };
+                $scope.clearAllChecks = function () {
+                    $scope.checkedBuilder = [];
+                    $scope.checkedItems = [];
+                    $scope.checkedCrates = [];
+                    $scope.checkedProjects = [];
+                    $scope.checkedNewItems = [];
+                    $scope.checkedBuilder = [];
                 };
                 $scope.modalItems = [];
                 $scope.compileModalItems = function (itemList) {
