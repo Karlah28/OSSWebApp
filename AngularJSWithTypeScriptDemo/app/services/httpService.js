@@ -23,6 +23,7 @@ var ossApp;
             };
             HttpService.prototype.serverPost = function (url, data, callback) {
                 var self = this;
+                console.log('url', url);
                 self.httpService.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
                 self.httpService.post(url, JSON.stringify(data)).success(function (data, status, headers, config) {
                     if (status === 200) {

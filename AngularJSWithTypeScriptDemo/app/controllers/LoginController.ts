@@ -62,35 +62,40 @@ module ossApp.controllers {
                         }
                         $location.url('/viewInventory');
                         window.alert("Log In Successful");
-
                     }
                     else {
                         console.log("login failed");
                         window.alert("Invalid Credentials, Please Try Again!");
                     }                                  
                 });
-                
-                //Send it using the service
-                
-               // $scope.user = new 
-                /*
-                if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
-                    console.log("login Success");
-                    alert("login success!");
-                    //LoginService.login(true);
-                    $localStorage.isLogged = true;
-                    $rootScope.isLogged = $localStorage.isLogged;
-                    $location.url('/storageManagement');
-                    $rootScope.isAdmin = true;
-                }
-                  */
-
             };
 
             $scope.register = () => {
+                var methodUrl = "/Account/RegisterUser";
+                var user = {
+                    "Organization": $scope.userOrganization,
+                    "PhoneNumber": $scope.userPhone,
+                    "DOB": $scope.userDOB,
+                    "UserType": 0,
+                    "FirstName": $scope.userFirstName,
+                    "LastName": $scope.userLastName,
+                    "Password": $scope.userPassword,
+                    "Email": $scope.registerEmail,
+                    "ObjectType": 0
 
+                };
+                HttpService.serverPost(baseUrl + methodUrl, user, (result, status) => {
+                    console.log('status', status);
+                    if (status === 200) {
+                        window.alert("Request Successfully Sent!");
+                        $location.url('/home');
 
-
+                    }
+                    else {
+                        console.log("login failed");
+                        window.alert("An Error Occurred, Please Try Again Later!");
+                    }
+                });
             }
 
             $rootScope.logout = () => {

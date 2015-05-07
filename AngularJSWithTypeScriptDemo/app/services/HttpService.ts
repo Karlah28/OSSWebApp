@@ -27,6 +27,7 @@ module ossApp.Services {
 
         public serverPost(url: string, data: any, callback: (data: any, status: any) => void): void {
             var self = this;
+            console.log('url', url);
 
             self.httpService.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
             self.httpService.post(url, JSON.stringify(data))
