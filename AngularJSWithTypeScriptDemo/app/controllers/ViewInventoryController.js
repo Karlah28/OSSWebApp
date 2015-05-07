@@ -15,22 +15,22 @@ var ossApp;
                 };
                 //OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 $scope.serverUrl = "http://localhost:51941/api";
-                $scope.request = function (request, checkedItems, checkedCrates) {
+                $scope.request = function (invRequest, checkedItems, checkedCrates) {
                     var urlController = "/Inventory/RequestInvForm";
                     if (!checkedItems) {
-                        checkedItems = [];
+                        invRequest.RequestedItems = [];
                     }
                     if (!checkedCrates) {
-                        checkedCrates = [];
+                        invRequest.RequestedCrates = [];
                     }
-                    request.RequestedCrates = checkedCrates;
-                    request.RequestedItems = checkedItems;
-                    request.InventoryType = 0;
-                    request.ObjectType = 0;
-                    request.CheckOutDate = request.CheckOutDate + "T19: 12:33.5289978 s- 05:00";
-                    request.ReturnDate = request.ReturnDate + "T19: 12:33.5289978 - 05:00";
-                    console.log(request.ReturnDate);
-                    HttpService.serverPost($scope.serverUrl + urlController, request, function (response) {
+                    invRequest.RequestedCrates = checkedCrates;
+                    invRequest.RequestedItems = checkedItems;
+                    invRequest.InventoryType = 0;
+                    invRequest.ObjectType = 0;
+                    invRequest.CheckOutDate = invRequest.CheckOutDate + "T19: 12:33.5289978 s- 05:00";
+                    invRequest.ReturnDate = invRequest.ReturnDate + "T19: 12:33.5289978 - 05:00";
+                    console.log(invRequest.ReturnDate);
+                    HttpService.serverPost($scope.serverUrl + urlController, invRequest, function (response) {
                         var x = response;
                     });
                 };
