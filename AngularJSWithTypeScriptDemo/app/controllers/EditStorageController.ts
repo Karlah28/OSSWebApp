@@ -183,7 +183,15 @@ module ossApp.controllers {
             };
 
   
-
+            $scope.getNewInventory = () => {
+                var urlController = "/Inventory/ViewEPCs";
+                HttpService.serverGet($scope.serverUrl + urlController,(response) => {
+                    $scope.newItems = [];
+                    for (var i = 0; i < response.length; i++) {
+                        $scope.newItems.push(response[i]);
+                    }
+                });     
+            };
 
             $scope.getItems = () => {
                 //this is the Route specified in the server's controllers 

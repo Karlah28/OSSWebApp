@@ -170,7 +170,7 @@
                             <!-- the ng-click calls a function in the controller that adds the item to an array-->
                         </td>
                         <td>
-                            {{item.EPCData.EPC}}\n
+                            {{item.EPCData.EPC}}
                             {{item.EPCData.Timestamp}}
                         </td>
                     </tr>
@@ -254,7 +254,7 @@
                         <th><a href="" ng-click="predicate ='ItemStatus'; modalReverse=!modalReverse">Item Status</a></th>
                         <tr ng-repeat="item in checkedItems | orderBy:predicate:modalReverse">
                             <td>
-                                {{item.EPCData.EPC}}\n
+                                {{item.EPCData.EPC}}
                                 {{item.EPCData.Timestamp}}
                             </td>
                             <td>
@@ -317,7 +317,7 @@
                         <th><a href="" ng-click="predicate ='CrateStatus'; modalReverse=!modalReverse">CrateStatus</a></th>
                         <tr ng-repeat="crate in checkedCrates | orderBy:predicate:modalReverse">
                             <td>
-                                {{crate.EPCData.EPC}}\n
+                                {{crate.EPCData.EPC}}
                                 {{crate.EPCData.Timestamp}}
                             </td>
                             <td>
@@ -487,7 +487,7 @@
                         <th><a href="" ng-click="predicate ='ItemStatus'; modalReverse=!modalReverse">Item Status</a></th>
                         <tr ng-repeat="item in checkedNewItems | orderBy:predicate:modalReverse">
                             <td>
-                                {{item.EPCData.EPC}}\n
+                                {{item.EPCData.EPC}}
                                 {{item.EPCData.Timestamp}}
                             </td>
                             <td>
