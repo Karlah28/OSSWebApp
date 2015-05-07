@@ -46,19 +46,12 @@
                 };
 
                 var urlController = "/Inventory/RequestInvForm";
-                if (!checkedItems) {
-                    invRequest.RequestedItems = [];
+                if (!invObject.RequestedItems) {
+                    invObject.RequestedItems = [];
                 }
-                if (!checkedCrates) {
-                    invRequest.RequestedCrates = [];
+                if (!invObject.RequestedCrates) {
+                    invObject.RequestedCrates = [];
                 }
-                invRequest.RequestedCrates = checkedCrates;
-                invRequest.RequestedItems = checkedItems;
-                invRequest.InventoryType = 0;
-                invRequest.ObjectType = 0;
-                invRequest.CheckOutDate = invRequest.CheckOutDate;
-                invRequest.ReturnDate = invRequest.ReturnDate;
-                console.log(invRequest.ReturnDate);
                 HttpService.serverPost($scope.serverUrl + urlController, invObject,(response) => {
                     var x = response;
                 });
