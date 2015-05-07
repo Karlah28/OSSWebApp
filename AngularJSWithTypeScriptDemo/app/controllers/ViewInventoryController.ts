@@ -32,11 +32,17 @@
 
             $scope.request = (request, checkedItems, checkedCrates) => {
                 var urlController = "/Inventory/RequestInvForm";
+                if (!checkedItems) {
+                    checkedItems = [];
+                }
+                if (!checkedCrates) {
+                    checkedCrates = [];
+                }
                 request.RequestedCrates = checkedCrates;
                 request.RequestedItems = checkedItems;
                 request.InventoryType = 0;
                 request.ObjectType = 0;
-                request.CheckOutDate = request.CheckOutDate + "T19: 12:33.5289978 - 05:00";
+                request.CheckOutDate = request.CheckOutDate + "T19: 12:33.5289978 s- 05:00";
                 request.ReturnDate = request.ReturnDate + "T19: 12:33.5289978 - 05:00";
                 console.log(request.ReturnDate);
                 HttpService.serverPost($scope.serverUrl + urlController, request,(response) => {
