@@ -53,7 +53,7 @@ module ossApp.controllers {
                 { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] },
                 { ProjectName: "myname2", Description: "some stuff about the project that might be too long 2", ItemList: ["this2", "that2", "the other thing2"], QuantityNeeded: [2, 3, 4] }
             ];
-            */
+            
             $scope.newItems = [
                 { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
                 { EPCData: { EPC: "3C", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
@@ -61,6 +61,7 @@ module ossApp.controllers {
                 { EPCData: { EPC: "3E", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
                 { EPCData: { EPC: "3F", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } }
             ];
+            */
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
             $scope.deleteItems = (items) => {
@@ -182,7 +183,7 @@ module ossApp.controllers {
                 $scope.currentProject = project;
             };
 
-  
+            $scope.newItems = [];
             $scope.getNewInventory = () => {
                 var urlController = "/Inventory/ViewEPCs";
                 HttpService.serverGet($scope.serverUrl + urlController,(response) => {
