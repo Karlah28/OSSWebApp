@@ -1,4 +1,4 @@
-/// <reference path="homecontroller.d.ts" />
+/// <reference path="HomeController.d.ts" />
 /// <reference path="../services/NavbarService.d.ts" />
 /// <reference path="../interfaces/interfaces.d.ts" />
 /// <reference path="../../scripts/typings/angularjs/angular.d.ts" />

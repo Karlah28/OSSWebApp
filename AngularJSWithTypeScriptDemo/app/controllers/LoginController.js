@@ -13,18 +13,42 @@ var ossApp;
                 $scope.title = "Login or Register";
                 //var favorites: Array<ossApp.Interfaces.ITrack>;
                 this.NavbarService = NavbarService;
-                var url = "your local host";
+                var baseUrl = "http://localhost:51941/api";
                 //$localStorage.message = "Karla";
                 //$scope.karla = $localStorage.message;
-                $scope.userEmail = "karla@mavs.uta";
-                $scope.password = "admin";
                 if ($localStorage.isLogged === null || $localStorage.isLogged === undefined) {
                     $localStorage.isLogged = false;
                 }
                 $scope.loginUser = function () {
-                    //create a registered user 
+                    //create a registered user
+                    var methodUrl = '/Account/Login';
+                    var user = {
+                        Email: $scope.UserName,
+                        Password: $scope.Password
+                    };
+                    var userType;
+                    HttpService.serverPost(baseUrl + methodUrl, user, function (result, status) {
+                        console.log('status', status);
+                        if (status === 200) {
+                            $localStorage.isLogged = true;
+                            $rootScope.isLogged = $localStorage.isLogged;
+                            if ($scope.UserName == 'joseph@gmail.com') {
+                                $rootScope.isAdmin = true;
+                            }
+                            else {
+                                $rootScope.isAdmin = false;
+                            }
+                            $location.url('/viewInventory');
+                            window.alert("Log In Successful");
+                        }
+                        else {
+                            console.log("login failed");
+                            window.alert("Invalid Credentials, Please Try Again!");
+                        }
+                    });
                     //Send it using the service
                     // $scope.user = new 
+                    /*
                     if ($scope.UserName == $scope.userEmail && $scope.Password == $scope.password) {
                         console.log("login Success");
                         alert("login success!");
@@ -34,16 +58,14 @@ var ossApp;
                         $location.url('/storageManagement');
                         $rootScope.isAdmin = true;
                     }
-                    else {
-                        console.log("login failed");
-                        window.alert("Invalid Credentials, Please Try Again!");
-                    }
+                      */
                 };
                 $scope.register = function () {
                 };
                 $rootScope.logout = function () {
                     $localStorage.isLogged = null;
                     $rootScope.isLogged = false;
+                    $rootScope.isAdmin = false;
                 };
             }
             LoginController.$inject = [
