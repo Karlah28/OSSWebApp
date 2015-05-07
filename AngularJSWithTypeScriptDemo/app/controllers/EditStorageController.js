@@ -37,7 +37,7 @@ var ossApp;
                     { ProjectName: "myname", Description: "some stuff about the project that might be too long", ItemList: ["this", "that", "the other thing"], QuantityNeeded: [1, 2, 3] },
                     { ProjectName: "myname2", Description: "some stuff about the project that might be too long 2", ItemList: ["this2", "that2", "the other thing2"], QuantityNeeded: [2, 3, 4] }
                 ];
-                */
+                
                 $scope.newItems = [
                     { EPCData: { EPC: "3B", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
                     { EPCData: { EPC: "3C", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
@@ -45,6 +45,7 @@ var ossApp;
                     { EPCData: { EPC: "3E", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } },
                     { EPCData: { EPC: "3F", Timestamp: "1984-11-24T00:00:00", ObjectType: 0 } }
                 ];
+                */
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>OSS CALLS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 $scope.deleteItems = function (items) {
                     var urlController = "/Inventory/DeleteItem";
@@ -57,7 +58,7 @@ var ossApp;
                 $scope.deleteCrates = function (crates) {
                     var urlController = "/Inventory/DeleteCrate";
                     for (var i = 0; i < crates.length; i++) {
-                        HttpService.serverPost($scope.serverUrl + urlController, crates[i].EPCData.EPC, function (response) {
+                        HttpService.serverPost($scope.serverUrl + urlController, { CrateEPC: crates[i].EPCData.EPC, DeleteItems: true }, function (response) {
                             var x = response;
                         });
                     }
@@ -156,6 +157,16 @@ var ossApp;
                 };
                 $scope.setCurrentProject = function (project) {
                     $scope.currentProject = project;
+                };
+                $scope.newItems = [];
+                $scope.getNewInventory = function () {
+                    var urlController = "/Inventory/ViewEPCs";
+                    HttpService.serverGet($scope.serverUrl + urlController, function (response) {
+                        $scope.newItems = [];
+                        for (var i = 0; i < response.length; i++) {
+                            $scope.newItems.push(response[i]);
+                        }
+                    });
                 };
                 $scope.getItems = function () {
                     //this is the Route specified in the server's controllers 

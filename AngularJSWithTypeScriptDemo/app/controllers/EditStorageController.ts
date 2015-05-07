@@ -75,7 +75,7 @@ module ossApp.controllers {
             $scope.deleteCrates = (crates) => {
                 var urlController = "/Inventory/DeleteCrate";
                 for (var i = 0; i < crates.length; i++) {                       //NEED TO PASS A BOOLEAN HERE **********
-                    HttpService.serverPost($scope.serverUrl + urlController, { crates[i].EPCData.EPC, true },(response) => {
+                    HttpService.serverPost($scope.serverUrl + urlController, { CrateEPC : crates[i].EPCData.EPC, DeleteItems : true },(response) => {
                         var x = response;
                     });
                 }
