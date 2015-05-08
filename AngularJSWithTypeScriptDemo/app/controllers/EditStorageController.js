@@ -268,14 +268,22 @@ var ossApp;
                 //used for the new items tab
                 $scope.checkedNewItems = [];
                 $scope.toggleNewItem = function (item) {
-                    var tempItem = {};
-                    if (item.EPC) {
-                        tempItem = item;
-                    }
+                    var tempItem = {
+                        EPC: item.EPC,
+                        Timestamp: item.Timestamp,
+                        ObjectType: 0
+                    };
+                    var passitem = {
+                        EPCData: {
+                            EPC: tempItem.EPC,
+                            Timestamp: tempItem.Timestamp,
+                            ObjectType: 0
+                        }
+                    };
                     var found = 0;
                     var index = 0;
                     for (var i = 0; i < $scope.checkedNewItems.length; i++) {
-                        if ($scope.checkedNewItems[i] == item) {
+                        if ($scope.checkedNewItems[i] == passitem) {
                             found = 1;
                             index = i;
                         }
@@ -284,7 +292,7 @@ var ossApp;
                         $scope.checkedNewItems.splice(index, 1);
                     }
                     else {
-                        $scope.checkedNewItems.push(item);
+                        $scope.checkedNewItems.push(passitem);
                     }
                 };
                 $scope.clearCheckedNewItems = function () {
