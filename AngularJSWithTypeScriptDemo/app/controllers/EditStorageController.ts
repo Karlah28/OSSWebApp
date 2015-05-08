@@ -306,6 +306,13 @@ module ossApp.controllers {
             //used for the new items tab
             $scope.checkedNewItems = [];
             $scope.toggleNewItem = (item) => {
+                var tempItem = {};
+                if (item.EPC) {
+                    tempItem = item;
+                    item.EPCData.EPC = tempItem.EPC;
+                    item.EPCData.Timestamp = tempItem.Timestamp;
+                    item.EPCData.ObjectType = 0;
+                }
                 var found = 0
                 var index = 0
                 for (var i = 0; i < $scope.checkedNewItems.length; i++) {

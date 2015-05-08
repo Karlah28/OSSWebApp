@@ -154,8 +154,8 @@
 
             //MODAL ITEMS STUFF===============================================
             $scope.modalItems = []
-            $scope.compileModalItems = (itemList) => {
-                $scope.modalItems = itemList;
+            $scope.compileModalItems = (ItemList) => {
+                $scope.modalItems = ItemList;
             };
 
             $scope.compileModalItems = (itemList, quantityList) => {

@@ -268,6 +268,10 @@ var ossApp;
                 //used for the new items tab
                 $scope.checkedNewItems = [];
                 $scope.toggleNewItem = function (item) {
+                    var tempItem = {};
+                    if (item.EPC) {
+                        tempItem = item;
+                    }
                     var found = 0;
                     var index = 0;
                     for (var i = 0; i < $scope.checkedNewItems.length; i++) {

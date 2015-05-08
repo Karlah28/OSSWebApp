@@ -129,8 +129,8 @@ var ossApp;
                 };
                 //MODAL ITEMS STUFF===============================================
                 $scope.modalItems = [];
-                $scope.compileModalItems = function (itemList) {
-                    $scope.modalItems = itemList;
+                $scope.compileModalItems = function (ItemList) {
+                    $scope.modalItems = ItemList;
                 };
                 $scope.compileModalItems = function (itemList, quantityList) {
                     $scope.modalItems = [];
